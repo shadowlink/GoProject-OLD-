@@ -1,2 +1,1 @@
-R1
--Commit inicial
+Aplicación para jugar al Go desarrollada sobre node.js y haciendo uso de websockets.

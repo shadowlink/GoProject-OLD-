@@ -32,6 +32,7 @@ app.configure('production', function(){
 
 app.get('/', routes.index);
 app.get('/about', routes.about);
+app.get('/registro', routes.registro);
 
 
 app.listen(3000, function(){
