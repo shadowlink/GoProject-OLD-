@@ -4,7 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Indice' })
+  res.render('index', { mailOk: "", user: req.session.nick, title: "GoProject" })
 };
 
 exports.about = function(req, res){

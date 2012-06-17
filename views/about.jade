@@ -1,2 +1,5 @@
 h1= title
-p Welcome to #{title}
+#articles
+    - each article in articles
+        .article
+            h1= article.nick

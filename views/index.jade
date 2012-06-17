@@ -1,25 +1,30 @@
 #panelBox
     #loginBetaBox
         #login
-            form#loginForm(action='/user_edit', method='post')
+            if user
+                h1= "Bienvenido "+user
+            form#loginForm(action='/login', method='post')
                 h3= "Usuario"
                 input#userField(type="text", name="user")
                 br
                 h3= "Password"
-                input(type="password", name="pass")
+                input#passField(type="password", name="pass")
                 br
-                button#loginButton(type='button')
+                button#loginButton(type='submit')
                     | Login
     #imageLoginBox
         img(src='../images/img_index.jpg', alt='Baduk')
 
 #beta
     h1= "Apúntate a la beta"
-    form#betaForm(action='/user_edit', method='post')
+    form#betaForm(action='/beta', method='post')
         h3= "Email"
-        input#userField(type="text", name="mail")
+        input#mailField(type="text", name="mail")
         button#betaButton(type='button')
             | Enviar
+    br
+    if mailOk
+        h3(style='color: #173B0B;') El mail #{mailOk} ha sido registrado. Gracias por tu interes!
 
 script(type='text/javascript')
     $(document).ready(function() {
@@ -27,6 +32,36 @@ script(type='text/javascript')
         $('#beta').fadeIn("slow")
     });
     
-    $("#userField").click(function() {
-        
+    $('#loginButton').click(function(e) {
+        if($('#userField').val()==''){
+            $('#userField').css({border: '1px solid red'});
+            e.preventDefault();
+        }
+        if($('#passField').val()==''){
+            $('#passField').css({border: '1px solid red'});
+            e.preventDefault();
+        }
+    });
+    
+    $('#userField').focusout(function(e){
+        if($(this).val()!=''){
+            $(this).css({border: '1px solid #38610B'})
+        }
+    });
+    
+    $('#passField').focusout(function(e){
+        if($(this).val()!=''){
+            $(this).css({border: '1px solid #38610B'})
+        }
+    });
+    
+    $('#betaButton').click(function(e) {
+        if($('#mailField').val()==''){
+            $('#mailField').css({border: '1px solid red'});
+            e.preventDefault();
+        }
+        else{
+            $("#betaForm").submit();
+            e.preventDefault();
+        }
     });
