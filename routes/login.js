@@ -6,12 +6,7 @@ exports.login = function(req, res){
   userProvider.findById(req.body.user, function(error, result){
     if(result && result.pass==req.body.pass){
       req.session.nick=req.body.user;
-      res.render('main', {
-        locals: {
-          title: 'GoProject',
-          user: req.session.nick
-        }
-      });
+      res.redirect('/main');
     }
     else
     {

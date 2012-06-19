@@ -1,4 +1,78 @@
-h1= title
-
-#body
-    h1= user
+#mainContent
+    #leftBar
+        #userBox
+            #avatarBox
+                h1= user
+                img(src='../images/nyancat.png', alt='Avatar')
+            #dataBox
+                #lvlBox
+                    img(src='../images/icons/lvl.png', alt='Grado')
+                    | 30 kyu
+                #winBox
+                    img(src='../images/icons/win.png', alt='Ganadas')
+                    | 1000
+                #lostBox
+                    img(src='../images/icons/lost.png', alt='Perdidas')
+                    | 1000
+        #settingsBox
+            .optionBox
+                h1= "Perfil"
+            .optionBox
+                h1= "Mensajes"
+            .optionBox
+                h1= "Partidas"
+    #middleBar
+        #searchBox
+            form#searchForm(action='/search', method='post')
+                input#userField(type="text", name="s")
+                button#searchButton(type='submit')
+                    | Buscar
+        
+        #gameContentBox
+            .gameBox
+                .flagBox
+                    img(src='../images/jp.png', alt='Avatar')
+                .titleGameBox
+                    h3= "Juego 1"
+                .settingsGameBox
+                    h3= "19x19"
+                .playBox
+                    button(type='button') Jugar!
+            .gameBox
+                .flagBox
+                    img(src='../images/jp.png', alt='Avatar')
+                .titleGameBox
+                    h3= "Juego 1"
+                .settingsGameBox
+                    h3= "19x19"
+                .playBox
+                    button(type='button') Jugar!
+            .gameBox
+                .flagBox
+                    img(src='../images/kr.png', alt='Avatar')
+                .titleGameBox
+                    h3= "Juego 1"
+                .settingsGameBox
+                    h3= "19x19"
+                .playBox
+                    button(type='button') Jugar!
+            .gameBox
+                .flagBox
+                    img(src='../images/jp.png', alt='Avatar')
+                .titleGameBox
+                    h3= "Juego 1"
+                .settingsGameBox
+                    h3= "19x19"
+                .playBox
+                    button(type='button') Jugar!
+            .gameBox
+                .flagBox
+                    img(src='../images/kr.png', alt='Avatar')
+                .titleGameBox
+                    h3= "Juego 1"
+                .settingsGameBox
+                    h3= "19x19"
+                .playBox
+                    button(type='button') Jugar!
+    #rightBar
+        h1= "Top Players"

@@ -2,7 +2,9 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/layout.css')
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
     block scripts
       script(src='http://code.jquery.com/jquery-1.7.2.js')
   body
@@ -12,3 +14,7 @@ html
     
     footer#footer
       h2= "Desarrollado por ShadowLink 2012"
+      
+script(type='text/javascript')      
+  $("body").css("display", "none");
+  $("body").fadeIn(1000);

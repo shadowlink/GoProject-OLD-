@@ -1,12 +1,3 @@
-* {
-  margin: 0px;
-  padding: 0px;
-}
-body {
-  font: 62.5%/1.5 Helvetica, Arial, "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
-  text-align: center;
-  background-image: url("../images/index_back.jpg");
-}
 input {
   background: #fff;
   border: 1px solid #bdbdbd;
@@ -105,24 +96,4 @@ input:focus {
 }
 #beta input {
   width: 85%;
-}
-#navbar {
-  text-align: left;
-  background: #fff;
-  width: auto;
-  height: auto;
-  opacity: 0.7;
-  padding: 5px 0px 5px 10px;
-  color: #173b0b;
-}
-#footer {
-  text-align: left;
-  background: #fff;
-  width: 100%;
-  height: auto;
-  opacity: 0.7;
-  padding: 5px 0px 5px 10px;
-  color: #173b0b;
-  position: fixed;
-  bottom: 0;
 }

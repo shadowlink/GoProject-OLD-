@@ -11,21 +11,6 @@ var express = require('express')
   , main = require('./routes/main.js');
 
 var app = module.exports = express.createServer();
-//var nano = require('nano')('http://nodejitsudb303329721299.iriscouch.com:5984');
-
-var conn = new(cradle.Connection)({
-  host: 'http://nodejitsudb303329721299.iriscouch.com',
-  port: 5984,
-  cache: true,
-  raw: false
-});
-
-var db = conn.database('users');
-
-db.save({_id: "Lizerg" ,nick: 'Lizerg', pass: 'lizerg2005'}, function (err, res) {
-    util.puts(res);
-    util.puts('Usuario introducido');
-});
 
 // Configuration
 
