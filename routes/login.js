@@ -1,6 +1,6 @@
 exports.login = function(req, res){
   
-  var UserProvider = require('../public/javascripts/BD/UserProvider').UserProvider;
+  var UserProvider = require('../Controllers/UserProvider').UserProvider;
   var userProvider= new UserProvider();
   
   userProvider.findById(req.body.user, function(error, result){
@@ -19,7 +19,7 @@ exports.login = function(req, res){
 
 exports.beta = function(req, res){
   
-  var UserProvider = require('../public/javascripts/BD/BetaProvider').UserProvider;
+  var UserProvider = require('../Controllers/BetaProvider').UserProvider;
   var betaProvider= new BetaProvider();
   
   var beta = {

@@ -1,0 +1,39 @@
+#chatBox {
+  float: left;
+  background: #fff;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid #848484;
+  width: 80%;
+  height: 500px;
+  margin: 53px 0px 0px 20px;
+  text-align: left;
+  padding: 5px 5px 5px 5px;
+  overflow: auto;
+}
+#inputChatBox {
+  float: left;
+  width: 86%;
+  margin: 10px 0px 0px 20px;
+  text-align: left;
+}
+#inputChatBox input {
+  width: 70%;
+  font-size: 150%;
+  vertical-align: middle;
+}
+#inputChatBox button {
+  width: 23%;
+  background: #fff;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #848484;
+  height: 32px;
+  vertical-align: middle;
+}
+#gameContentBox {
+  text-align: center;
+  vertical-align: middle;
+}
+#canvas {
+  background: #000;
+}

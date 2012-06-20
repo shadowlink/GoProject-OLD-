@@ -26,53 +26,30 @@
             form#searchForm(action='/search', method='post')
                 input#userField(type="text", name="s")
                 button#searchButton(type='submit')
-                    | Buscar
+                    img(src='../images/icons/search.png', alt='Buscar')
         
         #gameContentBox
-            .gameBox
-                .flagBox
-                    img(src='../images/jp.png', alt='Avatar')
-                .titleGameBox
-                    h3= "Juego 1"
-                .settingsGameBox
-                    h3= "19x19"
-                .playBox
-                    button(type='button') Jugar!
-            .gameBox
-                .flagBox
-                    img(src='../images/jp.png', alt='Avatar')
-                .titleGameBox
-                    h3= "Juego 1"
-                .settingsGameBox
-                    h3= "19x19"
-                .playBox
-                    button(type='button') Jugar!
-            .gameBox
-                .flagBox
-                    img(src='../images/kr.png', alt='Avatar')
-                .titleGameBox
-                    h3= "Juego 1"
-                .settingsGameBox
-                    h3= "19x19"
-                .playBox
-                    button(type='button') Jugar!
-            .gameBox
-                .flagBox
-                    img(src='../images/jp.png', alt='Avatar')
-                .titleGameBox
-                    h3= "Juego 1"
-                .settingsGameBox
-                    h3= "19x19"
-                .playBox
-                    button(type='button') Jugar!
-            .gameBox
-                .flagBox
-                    img(src='../images/kr.png', alt='Avatar')
-                .titleGameBox
-                    h3= "Juego 1"
-                .settingsGameBox
-                    h3= "19x19"
-                .playBox
-                    button(type='button') Jugar!
+            //-
+                .gameBox
+                    .flagBox
+                        img(src='../images/kr.png', alt='Avatar')
+                    .titleGameBox
+                        h3= "Juego 1"
+                    .creatorGameBox
+                        h3= "Lizerg"
+                    .settingsGameBox
+                        h3= "19x19"
+                    .playBox
+                        button(type='button') Jugar!
     #rightBar
         h1= "Top Players"
+        
+script(type='text/javascript')
+    $(document).ready(function() {
+        var i=0;
+        $.getJSON('/gamelist', function(res) {
+            for(i=0; i<res.length; i++){
+                $('#gameContentBox').append($('<div class="gameBox"><div class="flagBox"><img src="../images/jp.png" alt="Flag"></div><div class="titleGameBox"><h3>'+res[i].title+'</h3></div><div class="creatorGameBox"><h3>'+res[i].creator+'</h3></div><div class="settingsGameBox"><h3>'+res[i].type+'</h3></div><div class="playBox"><a href="/game/'+res[i]._id+'"><img src="../images/icons/play.png", alt="Play!"></img></a></div></div>'));
+            }
+        });
+    });

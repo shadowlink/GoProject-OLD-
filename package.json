@@ -1,12 +1,13 @@
 {
-  "name": "application-name",
-  "version": "0.0.1-6",
+  "name": "GoProject",
+  "version": "0.0.1-5",
   "private": true,
   "dependencies": {
     "express": "2.5.8",
     "stylus": ">= 0.0.1",
     "jade": ">= 0.0.1",
-    "cradle": ">= 0.6.3"
+    "cradle": ">= 0.6.3",
+    "socket.io": ">=0.9.0"
   },
   "subdomain": "NodeApp",
   "scripts": {

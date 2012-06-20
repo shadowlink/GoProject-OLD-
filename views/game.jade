@@ -1,0 +1,80 @@
+#mainContent
+    #leftBar
+        #userBox
+            #avatarBox
+                h1= user
+                img(src='../images/nyancat.png', alt='Avatar')
+            #dataBox
+                #lvlBox
+                    img(src='../images/icons/lvl.png', alt='Grado')
+                    | 30 kyu
+                #winBox
+                    img(src='../images/icons/win.png', alt='Ganadas')
+                    | 1000
+                #lostBox
+                    img(src='../images/icons/lost.png', alt='Perdidas')
+                    | 1000
+        #settingsBox
+            .optionBox
+                h1= "Perfil"
+            .optionBox
+                h1= "Mensajes"
+            .optionBox
+                h1= "Partidas"
+    #middleBar
+        #searchBox
+            form#searchForm(action='/search', method='post')
+                input#userField(type="text", name="s")
+                button#searchButton(type='submit')
+                    img(src='../images/icons/search.png', alt='Buscar')
+        
+        #gameContentBox
+            canvas#canvas(width='550', height='550')
+            
+    #rightBar
+        #chatBox
+        #inputChatBox
+            input#textChat(type="text", name="textChat")
+            button#botonChat(type='button')
+                | Enviar
+        
+script(type='text/javascript')
+    $(document).ready(function() {
+        var socket = io.connect('http://localhost');
+        
+        socket.on('mensaje', function (data) {
+          console.log(data);
+          $("#chatBox").append('<p><b>'+data.mensaje.user+': </b>'+data.mensaje.msg+'</p>')
+        });
+        
+        $("#botonChat").click(function(){
+            var mensaje = $("#textChat").val();
+            if(mensaje!=''){
+                socket.emit('mensaje', { user: '#{user}', msg: mensaje });
+                $("#chatBox").append('<p><b>#{user}: </b>'+mensaje+'</p>')
+                $("#textChat").val('');
+                $('#textChat').focus();
+                $("#chatBox").each( function() {
+                    var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
+                    this.scrollTop = scrollHeight - this.clientHeight;
+                });
+            }
+        });
+        
+        $("#textChat").keypress(function(e) {
+            var mensaje = $("#textChat").val();
+            if(e.which == 13 && mensaje!=''){
+                socket.emit('mensaje', { user: '#{user}', msg: mensaje });
+                $("#chatBox").append('<p><b>#{user}: </b>'+mensaje+'</p>')
+                $("#textChat").val('');
+                $("#chatBox").each( function(){
+                   var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
+                   this.scrollTop = scrollHeight - this.clientHeight;
+                });
+            }
+        });
+        
+        draw();
+    });
+
+script(src='../javascripts/game.js')
