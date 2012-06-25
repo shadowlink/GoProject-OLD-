@@ -7,7 +7,78 @@ var BLOCK_COLOUR_1 = '#debf83',
 	HIGHLIGHT_COLOUR = '#000000';
         
 var color = 1;
+var socket;
 
+
+socket = io.connect('http://localhost');
+
+
+//-------------SOCKET CHAT-----------------//
+
+socket.on('id', function (data) {
+  console.log(data);
+  socket.emit('id', { user: usuario, game: gameId });
+});
+
+socket.on('mensaje', function (data) {
+  console.log(data);
+  $("#chatBox").append('<p><b>'+data.mensaje.user+': </b>'+data.mensaje.msg+'</p>')
+});
+
+$("#botonChat").click(function(){
+    var mensaje = $("#textChat").val();
+    if(mensaje!=''){
+        socket.emit('mensaje', { user: usuario, msg: mensaje });
+        $("#chatBox").append('<p><b>'+usuario+': </b>'+mensaje+'</p>')
+        $("#textChat").val('');
+        $('#textChat').focus();
+        $("#chatBox").each( function() {
+            var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
+            this.scrollTop = scrollHeight - this.clientHeight;
+        });
+    }
+});
+
+$("#textChat").keypress(function(e) {
+    var mensaje = $("#textChat").val();
+    if(e.which == 13 && mensaje!=''){
+        socket.emit('mensaje', { user: usuario, msg: mensaje });
+        $("#chatBox").append('<p><b>'+usuario+'</b>'+mensaje+'</p>')
+        $("#textChat").val('');
+        $("#chatBox").each( function(){
+           var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
+           this.scrollTop = scrollHeight - this.clientHeight;
+        });
+    }
+});
+
+//-------------SOCKET JUEGO-----------------//
+
+
+
+function sendMov(cell){
+	socket.emit('movimiento', { pos: cell });
+}
+
+socket.on('movimiento', function (data) {
+
+	ctx.beginPath();
+	if(data.mensaje.color == 'b'){
+		ctx.fillStyle = '#000000';
+	}
+	else
+	{
+		ctx.fillStyle = '#FFFFFF';
+	}
+
+	
+	ctx.arc(data.mensaje.posX, data.mensaje.posY, 14, 0, 2 * Math.PI, true);
+	ctx.fill();	
+
+});
+
+//-------------PINTADO JUEGO-----------------//
+draw();
 function draw()
 {
 	// Main entry point got the HTML5 chess board example
@@ -135,8 +206,7 @@ function drawLines()
 
 function halmaOnClick(e) {
     var cell = getCursorPosition(e);
-
-
+    sendMov(cell);
 }
 
 function getCursorPosition(e) {
@@ -163,8 +233,14 @@ function getCursorPosition(e) {
 		ctx.fillStyle = '#FFFFFF';
 	}
 	color++;
-	ctx.arc(posX, posY, 14, 0, 2 * Math.PI, true);
-	ctx.fill();	
 
-	//alert(x+', '+y);
+	var cell = new Object();
+	cell.X = posX;
+	cell.Y = posY;
+	
+	//ctx.arc(posX, posY, 14, 0, 2 * Math.PI, true);
+	//ctx.fill();	
+
+	return cell;
 }
+

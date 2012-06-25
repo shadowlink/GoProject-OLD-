@@ -39,42 +39,7 @@
                 | Enviar
         
 script(type='text/javascript')
-    $(document).ready(function() {
-        var socket = io.connect('http://localhost');
-        
-        socket.on('mensaje', function (data) {
-          console.log(data);
-          $("#chatBox").append('<p><b>'+data.mensaje.user+': </b>'+data.mensaje.msg+'</p>')
-        });
-        
-        $("#botonChat").click(function(){
-            var mensaje = $("#textChat").val();
-            if(mensaje!=''){
-                socket.emit('mensaje', { user: '#{user}', msg: mensaje });
-                $("#chatBox").append('<p><b>#{user}: </b>'+mensaje+'</p>')
-                $("#textChat").val('');
-                $('#textChat').focus();
-                $("#chatBox").each( function() {
-                    var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
-                    this.scrollTop = scrollHeight - this.clientHeight;
-                });
-            }
-        });
-        
-        $("#textChat").keypress(function(e) {
-            var mensaje = $("#textChat").val();
-            if(e.which == 13 && mensaje!=''){
-                socket.emit('mensaje', { user: '#{user}', msg: mensaje });
-                $("#chatBox").append('<p><b>#{user}: </b>'+mensaje+'</p>')
-                $("#textChat").val('');
-                $("#chatBox").each( function(){
-                   var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
-                   this.scrollTop = scrollHeight - this.clientHeight;
-                });
-            }
-        });
-        
-        draw();
-    });
+    var usuario = '#{user}';
+    var gameId = '#{gameId}';
 
 script(src='../javascripts/game.js')
