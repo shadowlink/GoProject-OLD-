@@ -28,7 +28,7 @@ socket.on('mensaje', function (data) {
 $("#botonChat").click(function(){
     var mensaje = $("#textChat").val();
     if(mensaje!=''){
-        socket.emit('mensaje', { user: usuario, msg: mensaje });
+        socket.emit('mensaje', { game: gameId, user: usuario, msg: mensaje });
         $("#chatBox").append('<p><b>'+usuario+': </b>'+mensaje+'</p>')
         $("#textChat").val('');
         $('#textChat').focus();
@@ -42,8 +42,8 @@ $("#botonChat").click(function(){
 $("#textChat").keypress(function(e) {
     var mensaje = $("#textChat").val();
     if(e.which == 13 && mensaje!=''){
-        socket.emit('mensaje', { user: usuario, msg: mensaje });
-        $("#chatBox").append('<p><b>'+usuario+'</b>'+mensaje+'</p>')
+        socket.emit('mensaje', { game: gameId, user: usuario, msg: mensaje });
+        $("#chatBox").append('<p><b>'+usuario+': </b>'+mensaje+'</p>')
         $("#textChat").val('');
         $("#chatBox").each( function(){
            var scrollHeight = Math.max(this.scrollHeight, this.clientHeight);
@@ -57,7 +57,7 @@ $("#textChat").keypress(function(e) {
 
 
 function sendMov(cell){
-	socket.emit('movimiento', { pos: cell });
+	socket.emit('movimiento', { pos: cell, game: gameId });
 }
 
 socket.on('movimiento', function (data) {

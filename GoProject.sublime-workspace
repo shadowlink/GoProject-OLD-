@@ -1,0 +1,332 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"c",
+				"color"
+			],
+			[
+				"Pos",
+				"posX"
+			],
+			[
+				"player",
+				"playerInfo"
+			],
+			[
+				"pla",
+				"playerId"
+			],
+			[
+				"pl",
+				"playerId"
+			],
+			[
+				"s",
+				"socket"
+			],
+			[
+				"game",
+				"gameId"
+			],
+			[
+				"nu",
+				"NUMBER_OF_ROWS"
+			],
+			[
+				"blo",
+				"BLOCK_SIZE"
+			],
+			[
+				"Blo",
+				"BLOCK_SIZE"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 5174,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Class/Player.js",
+			"settings":
+			{
+				"buffer_size": 158,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascripts/game.js",
+			"settings":
+			{
+				"buffer_size": 6281,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "miClase = function(){\n\nthis.propiedad = “hola!”;\n\nthis.metodo = function(){\n\n/* aqui ‘this’ hace referencia al objeto al que pertenece el metodo */\n\nalert(this.propiedad);\n\n}\n\n}",
+			"file": "Class/Piedra.js",
+			"file_size": 3,
+			"file_write_time": 129851160205862479,
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Windows",
+				"name": "eee"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/game.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/login.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/index.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/gameList.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/game.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/javascripts/game.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/goServer.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/server.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.css",
+		"/C/Users/shado_000/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/shado_000/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/layout.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/index.jade"
+	],
+	"find":
+	{
+		"height": 0.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"settings":
+					{
+						"buffer_size": 5174,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								385,
+								385
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1035.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Class/Player.js",
+					"settings":
+					{
+						"buffer_size": 158,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								153,
+								153
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/javascripts/game.js",
+					"settings":
+					{
+						"buffer_size": 6281,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1697,
+								1697
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 765.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Class/Piedra.js",
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "eee",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 212.0,
+	"status_bar_visible": true
+}

@@ -13,6 +13,9 @@ var express = require('express')
   , gameList = require('./routes/gameList.js')
   , game = require('./routes/game.js');
 
+require('./Class/Player.js');
+require('./Class/Partida.js');
+require('./Class/Piedra.js');
 
 var app = module.exports = express.createServer();
 
@@ -59,9 +62,18 @@ app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
+
+
+
+
+
+
+
+
+
 //-------------SERVIDOR CHAT Y JUEGO-------------//
 
-var players = [];
+var partidas = [];
 
 socket.sockets.on('connection', function (socket) {
  
@@ -69,26 +81,33 @@ socket.sockets.on('connection', function (socket) {
 
   socket.on('id', function (data) {
     
-    var color;
-    var turno;
-
     if(gameExists(data.game)){
-      color = 'w';
-      turno = 0;
+      
+      var playerInfo = new Player();
+      playerInfo.customId = data.user;
+      playerInfo.playerId = socket.id;
+      playerInfo.gameId = data.game;
+      playerInfo.socket = socket;
+      playerInfo.color = 'w';
+      playerInfo.turno = 0;      
+
+      setPlayer2(data.game, playerInfo);
     }
     else{
-      color ='b';
-      turno = 1;
-    }
+      var partida = new Partida();
+      partida.gameId = data.game;
 
-    var playerInfo = new Object();
-    playerInfo.customId = data.user;
-    playerInfo.playerId = socket.id;
-    playerInfo.gameId = data.game;
-    playerInfo.socket = socket;
-    playerInfo.color = color;
-    playerInfo.turno = turno;
-    players.push(playerInfo);
+      var playerInfo = new Player();
+      playerInfo.customId = data.user;
+      playerInfo.playerId = socket.id;
+      playerInfo.gameId = data.game;
+      playerInfo.socket = socket;
+      playerInfo.color = 'b';
+      playerInfo.turno = 1;
+
+      partida.players.push(playerInfo);
+      partidas.push(partida);
+    }
 
     console.log("\n-----------Nuevo jugador-----------\n"+"Usuario: "+data.user+"\nPartida: "+data.game+"\n---------------------------------\n\n");
   });
@@ -96,28 +115,22 @@ socket.sockets.on('connection', function (socket) {
   socket.on('mensaje', function (data) {
     //socket.broadcast.emit('mensaje', { mensaje: data });
 
-    var gameId;
-    for( var i=0, len=players.length; i<len; ++i ){
-        var c = players[i];
-        if(c.playerId == socket.id){
-            gameId=c.gameId;
-            break;
+    for(i=0; i<partidas.length; i++){
+      if(partidas[i].gameId == data.game){
+        for(j=0; j<partidas[i].players.length; j++){
+          if(partidas[i].players[j].playerId != socket.id)
+          {
+            partidas[i].players[j].socket.emit('mensaje', { mensaje: data });
+          }
         }
+      }
     }
-
-    for( var i=0, len=players.length; i<len; ++i ){
-        var c = players[i];
-        if(c.gameId == gameId && c.playerId!=socket.id){
-            c.socket.emit('mensaje', { mensaje: data });
-        }
-    }
-
 
   });
 
   socket.on('disconnect', function (data) {
 
-    for( var i=0, len=players.length; i<len; ++i ){
+    /*for( var i=0, len=players.length; i<len; ++i ){
         var c = players[i];
 
         if(c.playerId == socket.id){
@@ -125,43 +138,31 @@ socket.sockets.on('connection', function (socket) {
             console.log("\n-----------Jugador desconectado-----------\n"+"Usuario: "+c.customId+"\nPartida: "+c.gameId+"\n---------------------------------\n\n");
             break;
         }
-    }
+    }*/
   });
 
 
   socket.on('movimiento', function (data) {
 
-    if(suTurno(socket.id)){
-      var color = playerColor(socket.id)
+    console.log("NYAN");
+    if(suTurno(data.game, socket.id)){
       //Comprobar si la casilla esta ocupada
 
       //Creamos el objeto a enviar
-      var mov = new Object();
-      mov.posX = data.pos.X;
-      mov.posY = data.pos.Y;
-      mov.color = color;
+      var piedra = new Piedra();
+      piedra.posX = data.pos.X;
+      piedra.posY = data.pos.Y;
+      piedra.color = color;
 
-      console.log(data.pos.X);
-      console.log(data.pos.Y);
-
-      var gameId;
-      for( var i=0, len=players.length; i<len; ++i ){
-          var c = players[i];
-          if(c.playerId == socket.id){
-              gameId=c.gameId;
-              break;
+      for(i=0; i<partidas.length; i++){
+        if(partidas[i].gameId == data.game){
+          for(j=0; j<partidas[i].players.length; j++){
+            partidas[i].players[j].socket.emit('movimiento', { mensaje: piedra });
           }
+        }
       }
-
-      for( var i=0, len=players.length; i<len; ++i ){
-          var c = players[i];
-          if(c.gameId == gameId){
-              c.socket.emit('movimiento', { mensaje: mov });
-          }
-      }
-
       //Cambiamos el turno
-      cambiaTurno(gameId);
+      cambiaTurno(data.game);
 
     }
 
@@ -176,45 +177,62 @@ function gameExists(gameId){
 
   var exists = false;
 
-  for( var i=0, len=players.length; i<len; ++i ){
-      var c = players[i];
-      if(c.gameId == gameId){
-          exists = true;
-          break;
-      }
+  for(i=0; i<partidas.length; i++){
+    if(partidas[i].gameId == gameId){
+      exists = true;
+      break;
+    }
   }
 
   return exists; 
 }
 
-function playerColor(socket){
+function setPlayer2(gameId, player){
 
-    var color;
 
-    for( var i=0, len=players.length; i<len; ++i ){
-      var c = players[i];
-      if(c.playerId == socket){
-          color = c.color;
-          break;
-      }
-    } 
+  for(i=0; i<partidas.length; i++){
+    if(partidas[i].gameId == gameId){
+      partidas[i].players.push(player);
+      break;
+    }
+  }  
 
-    return color; 
 }
 
-function suTurno(socket){
+function playerColor(gameId, socket){
+
+  var color;
+
+  for(i=0; i<partidas.length; i++){
+    if(partidas[i].gameId == gameId){
+      for(j=0; j<partidas[i].players.length; j++){
+        if(partidas[i].players[j].playerId == socket){
+          color = partidas[i].players[j].color;
+        }
+      }
+    }
+    break;
+  }
+
+  return color; 
+}
+
+function suTurno(gameId, socket){
 
   var suTurno = false;
 
-  for( var i=0, len=players.length; i<len; ++i ){
-    var c = players[i];
-    if(c.playerId == socket){
-        if(c.turno == 1){
-          suTurno = true;
+  for(i=0; i<partidas.length; i++){
+    if(partidas[i].gameId == gameId){
+      for(j=0; j<partidas[i].players.length; j++){
+        if(partidas[i].players[j].playerId == socket){
+          if(partidas[i].players[j].turno == 1){
+            suTurno = true;
+          }
         }
-        break;
+      }
     }
-  }  
+    break;
+  }
 
   return suTurno;
 
@@ -222,16 +240,13 @@ function suTurno(socket){
 
 function cambiaTurno(gameId){
 
-  for( var i=0, len=players.length; i<len; ++i ){
-    var c = players[i];
-    if(c.gameId == gameId){
-        if(c.turno == 1){
-          c.turno = 0;
-        }
-        else{
-          c.turno = 1;
-        }
+  for(i=0; i<partidas.length; i++){
+    if(partidas[i].gameId == gameId){
+      for(j=0; j<partidas[i].players.length; j++){
+        partidas[i].players[j].CambiaTurno();
+      }
     }
+    break;
   }
 
 }
