@@ -144,8 +144,8 @@ socket.sockets.on('connection', function (socket) {
 
   socket.on('movimiento', function (data) {
 
-    console.log("NYAN");
     if(suTurno(data.game, socket.id)){
+      var color = playerColor(data.game, socket.id)
       //Comprobar si la casilla esta ocupada
 
       //Creamos el objeto a enviar
