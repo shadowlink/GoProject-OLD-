@@ -97,14 +97,11 @@ function draw()
 		// Draw the background
 		drawBoard();
 		drawLines();
-		defaultPositions();
 		
 		// Draw pieces
 		pieces = new Image();
 		pieces.src = 'pieces.png';
 		pieces.onload = drawPieces;
-
-		canvas.addEventListener('click', board_click, false);
 	}
 	else
 	{
@@ -193,15 +190,31 @@ function drawLines()
 	ctx.beginPath();
 	ctx.fillStyle = '#000000';
 	ctx.arc(275, 275, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((3*BLOCK_SIZE)+BLOCK_SIZE/2, 275, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((15*BLOCK_SIZE)+BLOCK_SIZE/2, 275, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((3*BLOCK_SIZE)+BLOCK_SIZE/2, (3*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((15*BLOCK_SIZE)+BLOCK_SIZE/2, (3*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((9*BLOCK_SIZE)+BLOCK_SIZE/2, (3*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((3*BLOCK_SIZE)+BLOCK_SIZE/2, (15*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((15*BLOCK_SIZE)+BLOCK_SIZE/2, (15*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.beginPath();
 	ctx.arc((9*BLOCK_SIZE)+BLOCK_SIZE/2, (15*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
-	ctx.fill();		
+	ctx.fill();
 }
 
 function halmaOnClick(e) {
