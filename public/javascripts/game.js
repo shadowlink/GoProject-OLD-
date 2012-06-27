@@ -91,7 +91,7 @@ function draw()
 		ctx = canvas.getContext('2d');
 		canvas.addEventListener("click", halmaOnClick, false);
 
-		// Calculdate the precise block size
+		// Calculate the precise block size
 		BLOCK_SIZE = canvas.height / NUMBER_OF_ROWS;
 		
 		// Draw the background
@@ -237,9 +237,6 @@ function getCursorPosition(e) {
 	var cell = new Object();
 	cell.X = posX;
 	cell.Y = posY;
-	
-	//ctx.arc(posX, posY, 14, 0, 2 * Math.PI, true);
-	//ctx.fill();	
 
 	return cell;
 }

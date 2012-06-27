@@ -81,17 +81,36 @@ socket.sockets.on('connection', function (socket) {
 
   socket.on('id', function (data) {
     
-    if(gameExists(data.game)){
-      
-      var playerInfo = new Player();
-      playerInfo.customId = data.user;
-      playerInfo.playerId = socket.id;
-      playerInfo.gameId = data.game;
-      playerInfo.socket = socket;
-      playerInfo.color = 'w';
-      playerInfo.turno = 0;      
+    var miPartida = getPartida(data.game);
 
-      setPlayer2(data.game, playerInfo);
+    if(miPartida != null){
+      //Comprobar si esta completo
+      if(miPartida.GameFull()){
+        //Si está completo comprobar si eres uno de ellos
+        if(miPartida.PlayerExists(data.user))
+        {
+            miPartida.SetPlayerSocket(data.user, socket);
+            //Si está completo y eres uno de ellos, recuperar la lista de piedras
+            EnviarPartida(miPartida, socket);
+
+        }
+        else
+        {
+            //Si está completo y no eres uno de ellos, añadirlo a la lista de viewers
+        }
+      }
+      else{
+        //Si la partida no esta completa pero eres uno de los jugadores
+        var playerInfo = new Player();
+        playerInfo.customId = data.user;
+        playerInfo.playerId = socket.id;
+        playerInfo.gameId = data.game;
+        playerInfo.socket = socket;
+        playerInfo.color = 'w';
+        playerInfo.turno = 0;      
+
+        miPartida.setPlayer2(playerInfo);
+      }
     }
     else{
       var partida = new Partida();
@@ -115,14 +134,12 @@ socket.sockets.on('connection', function (socket) {
   socket.on('mensaje', function (data) {
     //socket.broadcast.emit('mensaje', { mensaje: data });
 
-    for(i=0; i<partidas.length; i++){
-      if(partidas[i].gameId == data.game){
-        for(j=0; j<partidas[i].players.length; j++){
-          if(partidas[i].players[j].playerId != socket.id)
-          {
-            partidas[i].players[j].socket.emit('mensaje', { mensaje: data });
-          }
-        }
+    var miPartida = getPartida(data.game);
+
+    for(j=0; j<miPartida.players.length; j++){
+      if(miPartida.players[j].playerId != socket.id)
+      {
+        miPartida.players[j].socket.emit('mensaje', { mensaje: data });
       }
     }
 
@@ -130,40 +147,43 @@ socket.sockets.on('connection', function (socket) {
 
   socket.on('disconnect', function (data) {
 
-    /*for( var i=0, len=players.length; i<len; ++i ){
-        var c = players[i];
-
-        if(c.playerId == socket.id){
-            players.splice(i,1);
-            console.log("\n-----------Jugador desconectado-----------\n"+"Usuario: "+c.customId+"\nPartida: "+c.gameId+"\n---------------------------------\n\n");
-            break;
+    for(i=0; i<partidas.length; i++){
+      for(j=0; j<partidas[i].players.length; j++){
+        if(partidas[i].players[j].playerId == socket.id){
+          console.log("\n-----------Jugador desconectado-----------\n"+"Usuario: "+partidas[i].players[j].customId+"\nPartida: "+partidas[i].gameId+"\n---------------------------------\n\n");
+          //partidas[i].players.splice(j,1);
+          break;
         }
-    }*/
+      }
+    }
+      
   });
 
 
   socket.on('movimiento', function (data) {
 
-    if(suTurno(data.game, socket.id)){
-      var color = playerColor(data.game, socket.id)
+    var miPartida = getPartida(data.game);
+
+    if(miPartida.Turno(socket.id)){
       //Comprobar si la casilla esta ocupada
+      if(!miPartida.CasillaOcupada(data)){
+        //Creamos el objeto a enviar
+        var color = miPartida.PlayerColor(socket.id)
+        var piedra = new Piedra();
+        piedra.posX = data.pos.X;
+        piedra.posY = data.pos.Y;
+        piedra.color = color;
 
-      //Creamos el objeto a enviar
-      var piedra = new Piedra();
-      piedra.posX = data.pos.X;
-      piedra.posY = data.pos.Y;
-      piedra.color = color;
-
-      for(i=0; i<partidas.length; i++){
-        if(partidas[i].gameId == data.game){
-          for(j=0; j<partidas[i].players.length; j++){
-            partidas[i].players[j].socket.emit('movimiento', { mensaje: piedra });
-          }
+        //Añadimos el nuevo movimiento a la lista de movimientos de la partida
+        miPartida.listaPiedras.push(piedra);
+        for(j=0; j<miPartida.players.length; j++){
+            console.log("Enviado a: "+miPartida.players[j].customId);
+            miPartida.players[j].socket.emit('movimiento', { mensaje: piedra });
         }
-      }
-      //Cambiamos el turno
-      cambiaTurno(data.game);
 
+        //Cambiamos el turno
+        miPartida.CambiaTurno();
+      }
     }
 
   });
@@ -173,80 +193,24 @@ socket.sockets.on('connection', function (socket) {
 
 //----------AUXILIARES----------//
 
-function gameExists(gameId){
+function getPartida(gameId){
 
-  var exists = false;
-
+  var partida;
   for(i=0; i<partidas.length; i++){
     if(partidas[i].gameId == gameId){
-      exists = true;
-      break;
-    }
-  }
-
-  return exists; 
-}
-
-function setPlayer2(gameId, player){
-
-
-  for(i=0; i<partidas.length; i++){
-    if(partidas[i].gameId == gameId){
-      partidas[i].players.push(player);
-      break;
-    }
-  }  
-
-}
-
-function playerColor(gameId, socket){
-
-  var color;
-
-  for(i=0; i<partidas.length; i++){
-    if(partidas[i].gameId == gameId){
-      for(j=0; j<partidas[i].players.length; j++){
-        if(partidas[i].players[j].playerId == socket){
-          color = partidas[i].players[j].color;
-        }
-      }
+      partida = partidas[i];
     }
     break;
   }
 
-  return color; 
+  return partida;   
 }
 
-function suTurno(gameId, socket){
+function EnviarPartida(partida, socket){
 
-  var suTurno = false;
-
-  for(i=0; i<partidas.length; i++){
-    if(partidas[i].gameId == gameId){
-      for(j=0; j<partidas[i].players.length; j++){
-        if(partidas[i].players[j].playerId == socket){
-          if(partidas[i].players[j].turno == 1){
-            suTurno = true;
-          }
-        }
-      }
+    for(var i=0; i<partida.listaPiedras.length; i++)
+    {
+        socket.emit('movimiento', { mensaje: partida.listaPiedras[i] });
     }
-    break;
-  }
-
-  return suTurno;
-
-}
-
-function cambiaTurno(gameId){
-
-  for(i=0; i<partidas.length; i++){
-    if(partidas[i].gameId == gameId){
-      for(j=0; j<partidas[i].players.length; j++){
-        partidas[i].players[j].CambiaTurno();
-      }
-    }
-    break;
-  }
 
 }
