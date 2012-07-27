@@ -1,8 +1,9 @@
+require('./Cadena.js');
 Partida = function(){
-
     this.gameId;
 	this.players = [];
-    this.listaPiedras = [];
+    this.ListaCadenas = [];
+    this.tablero = createArray(19, 19);
 
 	this.GameFull = function(){
 
@@ -31,11 +32,9 @@ Partida = function(){
     this.CasillaOcupada = function(data){
         var ocupada = false;
 
-        for(j=0; j<this.listaPiedras.length; j++){
-            if(this.listaPiedras[j].posX == data.pos.X && this.listaPiedras[j].posY == data.pos.Y){
-                ocupada = true;
-                break;
-            }
+        if(this.tablero[data.pos.Columna][data.pos.Fila]!=null)
+        {
+            ocupada = true;
         }
 
         return ocupada;
@@ -85,5 +84,286 @@ Partida = function(){
                 break;
             }
         } 
+    }
+
+    this.nuevoMovimiento = function(piedra){
+        var TableroState = this.tablero.clone(true); //Guardamos el estado actual del tablero
+        var ListaCadenasState = this.ListaCadenas.slice(0); //Guardamos el estado actual de la lista de cadenas
+        var movimientoValido = false;
+        this.tablero[piedra.Columna][piedra.Fila]=piedra.color;
+
+        //Crear una nueva Cadena o agregar la piedra a Una Cadena existente
+        if(!this.piedraAdjunta(piedra)){
+            //Crear nueva cadena
+            var c = new Cadena();
+            c.agregarPiedra(piedra);
+            this.ListaCadenas.push(c);
+        }
+
+        //Obtener la cadena en la que esta la piedra, esta deberemos comprobarla la última de todas
+        var cadenaPiedra = null;
+        for(var i=0; i<this.ListaCadenas.length; i++){
+            if(this.ListaCadenas[i].existePiedra(piedra)){
+                cadenaPiedra = this.ListaCadenas[i];
+            }
+        }
+
+        //Eliminar las cadenas que no tienen libertades y que no sean la cadena donde hemos insertado la piedra
+        //Con esto prevenimos que la cadena objetivo se suicide aunque el grupo que la rodeaba pudiese haber muerto.
+        for(var i=0; i<this.ListaCadenas.length; i++){
+            if(this.ListaCadenas[i] != cadenaPiedra){
+                if(this.ListaCadenas[i].EliminarCadenasMuertas(this.tablero)){
+                    this.ListaCadenas.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        //Ahora si, comprobamos la cadena objetivo
+        if(cadenaPiedra.EliminarCadenasMuertas(this.tablero)){
+            //Suicidio, no podemos permitirlo, restuaramos el tablero
+            this.tablero = TableroState.clone(true);
+            this.ListaCadenas = ListaCadenasState.slice(0);
+            movimientoValido = false;
+            console.log("MOVIMIENTO NO VALIDO");
+        }
+        else{
+            //O el movimiento es valido
+            //O con el intento de suicidio has matado el grupo que te rodeaba
+            movimientoValido = true;
+            console.log("MOVIMIENTO VALIDO");
+        }
+
+        //DEBUG Formacion de cadenas
+        console.log("Numero de cadenas: "+this.ListaCadenas.length);
+        for(var i=0; i<this.ListaCadenas.length; i++){
+            console.log("CADENA\n")
+            for(var j=0; j<this.ListaCadenas[i].Piedras.length; j++){
+                console.log("("+this.ListaCadenas[i].Piedras[j].Columna+", "+this.ListaCadenas[i].Piedras[j].Fila+"), ");
+            }
+            console.log("Libertad: "+this.ListaCadenas[i].Libertades);
+        }
+
+        for (var i=0; i<19; i++){
+            for(var j=0; j<19; j++){
+                if(this.tablero[i][j]==null){
+                    process.stdout.write("· ");
+                }
+                else{
+                    process.stdout.write(this.tablero[i][j]+" ");
+                }
+            }
+            process.stdout.write("\n");
+        }
+
+        return movimientoValido;
+    }
+
+    this.Suicidio = function(piedra){
+
+        var suicidio = false;
+        var libertades = 4;
+
+        if(piedra.Columna-1>=0){
+            if(this.tablero[piedra.Columna-1][piedra.Fila]!=null){
+                if(this.tablero[piedra.Columna-1][piedra.Fila]!=piedra.color){
+                    //Arriba 
+                    libertades--;
+                }
+            }
+        }
+        
+        if(piedra.Fila+1<=18){
+            if(this.tablero[piedra.Columna][piedra.Fila+1]!=null){
+                if(this.tablero[piedra.Columna][piedra.Fila+1]!=piedra.color){
+                    //Derecha
+                    libertades--;
+                }
+            }
+        }
+        
+        if(piedra.Columna+1<=18){
+            if(this.tablero[piedra.Columna+1][piedra.Fila]!=null){
+                if(this.tablero[piedra.Columna+1][piedra.Fila]!=piedra.color){
+                    //Abajo
+                    libertades--;
+                }
+            }
+        }
+        
+        if(piedra.Fila-1>=0){
+            if(this.tablero[piedra.Columna][piedra.Fila-1]!=null){
+                if(this.tablero[piedra.Columna][piedra.Fila-1]!=piedra.color){
+                    //Izquierda
+                    libertades--;
+                }
+            }
+        }  
+
+        if(libertades==0){
+            suicidio = true;
+        }
+
+        return suicidio;      
+    }
+
+    //Combina cadenas
+    this.piedraAdjunta = function(piedra){
+        var CadenaFinal = new Cadena();
+        var adjunta = false;
+
+        if(piedra.Columna-1>=0){
+            if(this.tablero[piedra.Columna-1][piedra.Fila]!=null){
+                if(this.tablero[piedra.Columna-1][piedra.Fila]==piedra.color){
+                    //Arriba 
+                    var pos = this.buscarCadena(piedra.Columna-1, piedra.Fila);
+
+                    if(pos!=-1){
+                        CadenaFinal.agregarCadena(this.ListaCadenas[pos])
+                        this.ListaCadenas.splice(pos, 1)
+                        adjunta = true;
+                        console.log("Union Arriba");
+                    }
+                }
+            }
+        }
+        
+        if(piedra.Fila+1<=18){
+            if(this.tablero[piedra.Columna][piedra.Fila+1]!=null){
+                if(this.tablero[piedra.Columna][piedra.Fila+1]==piedra.color){
+                    //Derecha
+                    var pos = this.buscarCadena(piedra.Columna, piedra.Fila+1);
+                    if(pos!=-1){
+                        CadenaFinal.agregarCadena(this.ListaCadenas[pos])
+                        this.ListaCadenas.splice(pos, 1)
+                        adjunta = true;
+                        console.log("Union Derecha");
+                    }
+                }
+            }
+        }
+        
+        if(piedra.Columna+1<=18){
+            if(this.tablero[piedra.Columna+1][piedra.Fila]!=null){
+                if(this.tablero[piedra.Columna+1][piedra.Fila]==piedra.color){
+                    //Abajo
+                    var pos = this.buscarCadena(piedra.Columna+1, piedra.Fila);
+
+                    if(pos!=-1){
+                        CadenaFinal.agregarCadena(this.ListaCadenas[pos])
+                        this.ListaCadenas.splice(pos, 1)
+                        adjunta = true;
+                        console.log("Union Abajo");
+                    }
+                }
+            }
+        }
+        
+        if(piedra.Fila-1>=0){
+            if(this.tablero[piedra.Columna][piedra.Fila-1]!=null){
+                if(this.tablero[piedra.Columna][piedra.Fila-1]==piedra.color){
+                    //Izquierda
+                    var pos = this.buscarCadena(piedra.Columna, piedra.Fila-1);
+
+                    if(pos!=-1){
+                        CadenaFinal.agregarCadena(this.ListaCadenas[pos])
+                        this.ListaCadenas.splice(pos, 1)
+                        adjunta = true;
+                        console.log("Union Izquierda");
+                    }
+                }
+            }
+        }
+
+        if(adjunta){
+            CadenaFinal.agregarPiedra(piedra);
+            this.ListaCadenas.push(CadenaFinal);
+        }
+
+        return adjunta;
+    }
+
+    //Busca en que cadena se encuentra una piedra
+    this.buscarCadena = function(Columna, Fila){
+        var c = -1;
+        for(var i=0; i<this.ListaCadenas.length; i++){
+            for(var j=0; j<this.ListaCadenas[i].Piedras.length; j++){
+                if(this.ListaCadenas[i].Piedras[j].Columna==Columna 
+                    && this.ListaCadenas[i].Piedras[j].Fila==Fila){
+                    c = i;
+                    break;
+                }
+            }
+        }        
+
+        return c;
+    }
+
+    //Funciones auxiliares
+    function createArray(length) {
+        var a = new Array(length || 0);
+
+        if (arguments.length > 1) {
+            var args = Array.prototype.slice.call(arguments, 1);
+            for (var i = 0; i < length; i++) {
+                a[i] = createArray.apply(this, args);
+            }
+        }
+
+        return a;
+    }
+
+
+    //Funcion para clonar arrays
+    Array.prototype.clone = function(doDeepCopy) {
+        if(doDeepCopy) {
+            var encountered = [{
+                a : this,
+                b : []
+            }];
+
+            var item,
+                levels = [{a:this, b:encountered[0].b, i:0}],
+                level = 0,
+                i = 0,
+                len = this.length;
+
+            while(i < len) {
+                item = levels[level].a[i];
+                if(Object.prototype.toString.call(item) === "[object Array]") {
+                    for(var j = encountered.length - 1; j >= 0; j--) {
+                        if(encountered[j].a === item) {
+                            levels[level].b.push(encountered[j].b);
+                            break;
+                        }
+                    }
+                    if(j < 0) {
+                        encountered.push(j = {
+                            a : item,
+                            b : []
+                        });
+                        levels[level].b.push(j.b);
+                        levels[level].i = i + 1;
+                        levels[++level] = {a:item, b:j.b, i:0};
+                        i = -1;
+                        len = item.length;
+                    }
+                }
+                else {
+                    levels[level].b.push(item);
+                }
+
+                if(++i == len && level > 0) {
+                    levels.pop();
+                    i = levels[--level].i;
+                    len = levels[level].a.length;
+                }
+            }
+
+            return encountered[0].b;
+        }
+        else {
+            return this.slice(0);
+        }
     }
 }

@@ -6,7 +6,9 @@ var BLOCK_COLOUR_1 = '#debf83',
 	BLOCK_COLOUR_2 = '#debf83',
 	HIGHLIGHT_COLOUR = '#000000';
         
-var color = 1;
+var color = null;
+var turno = false;
+var tablero = [];
 var socket;
 
 
@@ -18,6 +20,13 @@ socket = io.connect('http://localhost');
 socket.on('id', function (data) {
   console.log(data);
   socket.emit('id', { user: usuario, game: gameId });
+});
+
+socket.on('color', function (data) {
+  color = data.color;
+  if(color == 'b'){
+  	turno = true;
+  }
 });
 
 socket.on('mensaje', function (data) {
@@ -61,26 +70,23 @@ function sendMov(cell){
 }
 
 socket.on('movimiento', function (data) {
+	canvas.width = canvas.width;
+	tablero = data.mensaje;
+	drawBoard();
+	drawLines();
+	drawPiedras();
 
-	ctx.beginPath();
-	if(data.mensaje.color == 'b'){
-		ctx.fillStyle = '#000000';
+	if(turno == false){
+		turno = true;
 	}
-	else
-	{
-		ctx.fillStyle = '#FFFFFF';
+	else{
+		turno = false;
 	}
-
-	
-	ctx.arc(data.mensaje.posX, data.mensaje.posY, 14, 0, 2 * Math.PI, true);
-	ctx.fill();	
-
 });
 
 //-------------PINTADO JUEGO-----------------//
 draw();
-function draw()
-{
+function draw(){
 	// Main entry point got the HTML5 chess board example
 	canvas = document.getElementById('canvas');
 	contentBox = document.getElementById('gameContentBox');
@@ -90,6 +96,8 @@ function draw()
 	{
 		ctx = canvas.getContext('2d');
 		canvas.addEventListener("click", halmaOnClick, false);
+		canvas.addEventListener('mousemove', mouseMove, false);
+		canvas.addEventListener('mouseout', mouseLeave, false);
 
 		// Calculate the precise block size
 		BLOCK_SIZE = canvas.height / NUMBER_OF_ROWS;
@@ -109,8 +117,7 @@ function draw()
 	}
 }
 
-function drawBoard()
-{	
+function drawBoard(){	
 	for(iRowCounter = 0; iRowCounter < NUMBER_OF_ROWS; iRowCounter++)
 	{
 		drawRow(iRowCounter);
@@ -122,8 +129,7 @@ function drawBoard()
 	ctx.strokeRect(0, 0, NUMBER_OF_ROWS * BLOCK_SIZE, NUMBER_OF_COLS * BLOCK_SIZE);	
 }
 
-function drawRow(iRowCounter)
-{
+function drawRow(iRowCounter){
 	// Draw 8 block left to right
 	for(iBlockCounter = 0; iBlockCounter < NUMBER_OF_ROWS; iBlockCounter++)
 	{
@@ -131,8 +137,7 @@ function drawRow(iRowCounter)
 	}
 }
 
-function drawBlock(iRowCounter, iBlockCounter)
-{	
+function drawBlock(iRowCounter, iBlockCounter){	
 	// Set the background
 
 	ctx.fillStyle = getBlockColour(iRowCounter, iBlockCounter);
@@ -144,8 +149,7 @@ function drawBlock(iRowCounter, iBlockCounter)
 	ctx.stroke();	
 }
 
-function getBlockColour(iRowCounter, iBlockCounter)
-{
+function getBlockColour(iRowCounter, iBlockCounter){
 	var cStartColour;
 	
 	// Alternate the block colour
@@ -157,8 +161,7 @@ function getBlockColour(iRowCounter, iBlockCounter)
 	return cStartColour;
 }
 
-function drawLines()
-{
+function drawLines(){
 
 	//Pintamos las lineas horizontales
 	for(iRowCounter = 0; iRowCounter < NUMBER_OF_ROWS; iRowCounter++)
@@ -217,9 +220,67 @@ function drawLines()
 	ctx.fill();
 }
 
+function drawPiedras(){
+	for(var i=0; i<tablero.length; i++){
+		for(var j=0; j<tablero.length; j++){
+
+			ctx.beginPath();
+			if(tablero[i][j] == 'b'){
+				ctx.fillStyle = '#000000';
+			}
+			else if(tablero[i][j] == 'w')
+			{
+				ctx.fillStyle = '#FFFFFF';
+			}
+			
+			if(tablero[i][j]!=null){
+				ctx.arc((j*BLOCK_SIZE)+(BLOCK_SIZE/2), (i*BLOCK_SIZE)+(BLOCK_SIZE/2), 14, 0, 2 * Math.PI, true);
+				ctx.fill();	
+			}
+		}
+	}
+}
+
 function halmaOnClick(e) {
     var cell = getCursorPosition(e);
     sendMov(cell);
+}
+
+function mouseLeave(e){
+	canvas.width = canvas.width;
+	drawBoard();
+	drawLines();
+	drawPiedras();
+}
+
+function mouseMove(e){
+	if(turno){
+		canvas.width = canvas.width;
+		drawBoard();
+		drawLines();
+		drawPiedras();
+	    var x;
+	    var y;
+	    offset = $('#canvas').offset();
+		x = e.pageX - offset.left;
+		y = e.pageY - offset.top;
+
+		var fila, columna, posX, posY;
+		fila = Math.floor(x/BLOCK_SIZE);
+		columna = Math.floor(y/BLOCK_SIZE);
+		posX = (fila*BLOCK_SIZE)+(BLOCK_SIZE/2);
+		posY = (columna*BLOCK_SIZE)+(BLOCK_SIZE/2);
+
+		ctx.beginPath();
+		if(color=='b'){
+			ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+		}
+		else if(color=='w'){
+			ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+		}
+		ctx.arc(posX, posY, 14, 0, 2 * Math.PI, true);
+		ctx.fill();	
+	}
 }
 
 function getCursorPosition(e) {
@@ -237,19 +298,12 @@ function getCursorPosition(e) {
 	posX = (fila*BLOCK_SIZE)+(BLOCK_SIZE/2);
 	posY = (columna*BLOCK_SIZE)+(BLOCK_SIZE/2);
 
-	ctx.beginPath();
-	if(color%2!=0){
-		ctx.fillStyle = '#000000';
-	}
-	else
-	{
-		ctx.fillStyle = '#FFFFFF';
-	}
-	color++;
-
 	var cell = new Object();
 	cell.X = posX;
 	cell.Y = posY;
+
+	cell.Fila = fila;
+	cell.Columna = columna;
 
 	return cell;
 }

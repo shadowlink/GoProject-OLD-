@@ -16,6 +16,7 @@ var express = require('express')
 require('./Class/Player.js');
 require('./Class/Partida.js');
 require('./Class/Piedra.js');
+require('./Class/Cadena.js');
 
 var app = module.exports = express.createServer();
 
@@ -56,7 +57,7 @@ app.get('/about', function(req,res){
 
 })
 
-var socket = io.listen(app);
+var socket = io.listen(app, { log: false });
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
@@ -82,6 +83,7 @@ socket.sockets.on('connection', function (socket) {
   socket.on('id', function (data) {
     
     var miPartida = getPartida(data.game);
+    var playerInfo = new Player();
 
     if(miPartida != null){
       //Comprobar si esta completo
@@ -92,16 +94,23 @@ socket.sockets.on('connection', function (socket) {
             miPartida.SetPlayerSocket(data.user, socket);
             //Si está completo y eres uno de ellos, recuperar la lista de piedras
             EnviarPartida(miPartida, socket);
-
         }
         else
         {
-            //Si está completo y no eres uno de ellos, añadirlo a la lista de viewers
+            //Si está completo y no eres uno de ellos, añadirlo como viewer y recuperar la partida
+            playerInfo.customId = data.user;
+            playerInfo.playerId = socket.id;
+            playerInfo.gameId = data.game;
+            playerInfo.socket = socket;
+            playerInfo.color = 'v';
+            playerInfo.turno = 2;      
+
+            miPartida.setPlayer2(playerInfo);
+            EnviarPartida(miPartida, socket);
         }
       }
       else{
         //Si la partida no esta completa pero eres uno de los jugadores
-        var playerInfo = new Player();
         playerInfo.customId = data.user;
         playerInfo.playerId = socket.id;
         playerInfo.gameId = data.game;
@@ -116,7 +125,6 @@ socket.sockets.on('connection', function (socket) {
       var partida = new Partida();
       partida.gameId = data.game;
 
-      var playerInfo = new Player();
       playerInfo.customId = data.user;
       playerInfo.playerId = socket.id;
       playerInfo.gameId = data.game;
@@ -127,6 +135,8 @@ socket.sockets.on('connection', function (socket) {
       partida.players.push(playerInfo);
       partidas.push(partida);
     }
+
+    socket.emit('color', { color: playerInfo.color });
 
     console.log("\n-----------Nuevo jugador-----------\n"+"Usuario: "+data.user+"\nPartida: "+data.game+"\n---------------------------------\n\n");
   });
@@ -164,6 +174,7 @@ socket.sockets.on('connection', function (socket) {
 
     var miPartida = getPartida(data.game);
 
+    //Comprobar si es el turno del jugador
     if(miPartida.Turno(socket.id)){
       //Comprobar si la casilla esta ocupada
       if(!miPartida.CasillaOcupada(data)){
@@ -172,17 +183,21 @@ socket.sockets.on('connection', function (socket) {
         var piedra = new Piedra();
         piedra.posX = data.pos.X;
         piedra.posY = data.pos.Y;
+        piedra.Fila = data.pos.Fila;
+        piedra.Columna = data.pos.Columna;
         piedra.color = color;
 
-        //Añadimos el nuevo movimiento a la lista de movimientos de la partida
-        miPartida.listaPiedras.push(piedra);
-        for(j=0; j<miPartida.players.length; j++){
-            console.log("Enviado a: "+miPartida.players[j].customId);
-            miPartida.players[j].socket.emit('movimiento', { mensaje: piedra });
-        }
 
-        //Cambiamos el turno
-        miPartida.CambiaTurno();
+        //Añadimos el nuevo movimiento a la lista de movimientos de la partida si se permite
+        if(miPartida.nuevoMovimiento(piedra)){
+          for(j=0; j<miPartida.players.length; j++){
+              //console.log("Enviado a: "+miPartida.players[j].customId);
+              miPartida.players[j].socket.emit('movimiento', { mensaje: miPartida.tablero });
+          }
+
+          //Cambiamos el turno
+          miPartida.CambiaTurno();
+        }
       }
     }
 
@@ -208,9 +223,9 @@ function getPartida(gameId){
 
 function EnviarPartida(partida, socket){
 
-    for(var i=0; i<partida.listaPiedras.length; i++)
+    /*for(var i=0; i<partida.listaPiedras.length; i++)
     {
         socket.emit('movimiento', { mensaje: partida.listaPiedras[i] });
-    }
+    }*/
 
 }
