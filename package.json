@@ -11,7 +11,7 @@
   },
   "subdomain": "NodeApp",
   "scripts": {
-    "start": "server.js"
+    "start": "server.js",
 	"test": "vows --spec"
   },
   "engines": {
