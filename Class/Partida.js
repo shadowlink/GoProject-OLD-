@@ -1,6 +1,10 @@
 require('./Cadena.js');
 Partida = function(){
+    this.nombre = "Default";
     this.gameId;
+    this.autor;
+    this.pass = 0;
+    this.endGame = false;
 	this.players = [];
     this.ListaCadenas = [];
     this.tablero = createArray(19, 19);
@@ -86,7 +90,33 @@ Partida = function(){
         } 
     }
 
-    this.nuevoMovimiento = function(piedra){
+    this.getPlayer = function(user){
+        var player = null;
+
+        for(j=0; j<this.players.length; j++){
+            if(this.players[j].customId == user){
+                player = this.players[j];
+                break;
+            }
+        }
+
+        return player;        
+    }
+
+    this.getPlayerBySocket = function(socket){
+        var player = null;
+
+        for(j=0; j<this.players.length; j++){
+            if(this.players[j].socket == socket){
+                player = this.players[j];
+                break;
+            }
+        }
+
+        return player;               
+    }
+
+    this.nuevoMovimiento = function(piedra, socket){
         var TableroState = this.tablero.clone(true); //Guardamos el estado actual del tablero
         var ListaCadenasState = this.ListaCadenas.slice(0); //Guardamos el estado actual de la lista de cadenas
         var movimientoValido = false;
@@ -109,10 +139,12 @@ Partida = function(){
         }
 
         //Eliminar las cadenas que no tienen libertades y que no sean la cadena donde hemos insertado la piedra
-        //Con esto prevenimos que la cadena objetivo se suicide aunque el grupo que la rodeaba pudiese haber muerto.
+        //Con esto prevenimos que la cadena objetivo se suicide si el grupo que la rodeaba ha muerto.
         for(var i=0; i<this.ListaCadenas.length; i++){
             if(this.ListaCadenas[i] != cadenaPiedra){
                 if(this.ListaCadenas[i].EliminarCadenasMuertas(this.tablero)){
+                    var p = this.getPlayerBySocket(socket);
+                    p.ptos += this.ListaCadenas[i].numPiedras();
                     this.ListaCadenas.splice(i, 1);
                     i--;
                 }
@@ -157,54 +189,6 @@ Partida = function(){
         }
 
         return movimientoValido;
-    }
-
-    this.Suicidio = function(piedra){
-
-        var suicidio = false;
-        var libertades = 4;
-
-        if(piedra.Columna-1>=0){
-            if(this.tablero[piedra.Columna-1][piedra.Fila]!=null){
-                if(this.tablero[piedra.Columna-1][piedra.Fila]!=piedra.color){
-                    //Arriba 
-                    libertades--;
-                }
-            }
-        }
-        
-        if(piedra.Fila+1<=18){
-            if(this.tablero[piedra.Columna][piedra.Fila+1]!=null){
-                if(this.tablero[piedra.Columna][piedra.Fila+1]!=piedra.color){
-                    //Derecha
-                    libertades--;
-                }
-            }
-        }
-        
-        if(piedra.Columna+1<=18){
-            if(this.tablero[piedra.Columna+1][piedra.Fila]!=null){
-                if(this.tablero[piedra.Columna+1][piedra.Fila]!=piedra.color){
-                    //Abajo
-                    libertades--;
-                }
-            }
-        }
-        
-        if(piedra.Fila-1>=0){
-            if(this.tablero[piedra.Columna][piedra.Fila-1]!=null){
-                if(this.tablero[piedra.Columna][piedra.Fila-1]!=piedra.color){
-                    //Izquierda
-                    libertades--;
-                }
-            }
-        }  
-
-        if(libertades==0){
-            suicidio = true;
-        }
-
-        return suicidio;      
     }
 
     //Combina cadenas
@@ -297,6 +281,23 @@ Partida = function(){
         }        
 
         return c;
+    }
+
+    this.getPlayersInfo = function(){
+        var listPlayersInfo = []; 
+
+        for(var i=0; i<this.players.length; i++){
+            var playerinfo = {};
+            playerinfo.customId = this.players[i].customId;
+            playerinfo.playerId = this.players[i].playerId;
+            playerinfo.gameId = this.players[i].gameId;
+            playerinfo.color = this.players[i].color;
+            playerinfo.turno = this.players[i].turno;
+            playerinfo.ptos = this.players[i].ptos;
+            listPlayersInfo.push(playerinfo);
+        }
+
+        return listPlayersInfo;
     }
 
     //Funciones auxiliares

@@ -6,6 +6,7 @@ Player = function(){
     this.socket;
     this.color;
     this.turno;
+    this.ptos = 0;
 
 	this.CambiaTurno = function(){
 		if(this.turno == 1){

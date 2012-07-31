@@ -22,13 +22,6 @@ socket.on('id', function (data) {
   socket.emit('id', { user: usuario, game: gameId });
 });
 
-socket.on('color', function (data) {
-  color = data.color;
-  if(color == 'b'){
-  	turno = true;
-  }
-});
-
 socket.on('mensaje', function (data) {
   console.log(data);
   $("#chatBox").append('<p><b>'+data.mensaje.user+': </b>'+data.mensaje.msg+'</p>')
@@ -63,7 +56,35 @@ $("#textChat").keypress(function(e) {
 
 //-------------SOCKET JUEGO-----------------//
 
+socket.on('color', function (data) {
+  color = data.color;
+  if(color == 'b'){
+  	turno = true;
+  }
+});
 
+socket.on('listaplayers', function (data) {
+		$('#players').empty();
+		for(var i=0; i < data.lista.length; i++){
+		  $('#players').append($('<div class="player" id ='+data.lista[i].customId+'><h1>'+data.lista[i].customId+'</h1><img src = "../images/nyancat.png"><div class="points">0</div></div>'));
+		}
+	
+});
+
+$("#botonPass").click(function(){
+	//turno = false;
+    socket.emit('pass', { game: gameId });
+});
+
+$("#botonAbandon").click(function(){
+	//turno = false;
+    socket.emit('abandonar', { game: gameId, user: usuario });
+});
+
+$("#botonExit").click(function(){
+	//turno = false;
+    socket.emit('salir', { game: gameId, user: usuario });
+});
 
 function sendMov(cell){
 	socket.emit('movimiento', { pos: cell, game: gameId });
@@ -107,9 +128,9 @@ function draw(){
 		drawLines();
 		
 		// Draw pieces
-		pieces = new Image();
-		pieces.src = 'pieces.png';
-		pieces.onload = drawPieces;
+		//pieces = new Image();
+		//pieces.src = 'pieces.png';
+		//pieces.onload = drawPieces;
 	}
 	else
 	{
@@ -169,7 +190,7 @@ function drawLines(){
 
 		ctx.fillStyle = "black";
  	 	ctx.font = "bold 10px Arial";
-		ctx.fillText(iRowCounter+1, 0, (iRowCounter*BLOCK_SIZE)+(BLOCK_SIZE/2)+5);
+		//ctx.fillText(iRowCounter+1, 0, (iRowCounter*BLOCK_SIZE)+(BLOCK_SIZE/2)+5);
 
 		ctx.strokeStyle = '#000000';
 		ctx.beginPath();
@@ -192,13 +213,13 @@ function drawLines(){
 	//Pintamos los Hoshi y el Tengen
 	ctx.beginPath();
 	ctx.fillStyle = '#000000';
-	ctx.arc(275, 275, 5, 0, 2 * Math.PI, true);
+	ctx.arc((9*BLOCK_SIZE)+BLOCK_SIZE/2, (9*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
 	ctx.fill();
 	ctx.beginPath();
-	ctx.arc((3*BLOCK_SIZE)+BLOCK_SIZE/2, 275, 5, 0, 2 * Math.PI, true);
+	ctx.arc((3*BLOCK_SIZE)+BLOCK_SIZE/2, (9*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
 	ctx.fill();
 	ctx.beginPath();
-	ctx.arc((15*BLOCK_SIZE)+BLOCK_SIZE/2, 275, 5, 0, 2 * Math.PI, true);
+	ctx.arc((15*BLOCK_SIZE)+BLOCK_SIZE/2, (9*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);
 	ctx.fill();
 	ctx.beginPath();
 	ctx.arc((3*BLOCK_SIZE)+BLOCK_SIZE/2, (3*BLOCK_SIZE)+BLOCK_SIZE/2, 5, 0, 2 * Math.PI, true);

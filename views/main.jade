@@ -27,29 +27,47 @@
                 input#userField(type="text", name="s")
                 button#searchButton(type='submit')
                     img(src='../images/icons/search.png', alt='Buscar')
-        
+                button#botonCrear(type='button')
+                    | Crear
+                button#botonReload(type='button')
+                    | Reload        
         #gameContentBox
-            //-
-                .gameBox
-                    .flagBox
-                        img(src='../images/kr.png', alt='Avatar')
-                    .titleGameBox
-                        h3= "Juego 1"
-                    .creatorGameBox
-                        h3= "Lizerg"
-                    .settingsGameBox
-                        h3= "19x19"
-                    .playBox
-                        button(type='button') Jugar!
     #rightBar
         h1= "Top Players"
         
 script(type='text/javascript')
     $(document).ready(function() {
-        var i=0;
+        /*var i=0;
         $.getJSON('/gamelist', function(res) {
             for(i=0; i<res.length; i++){
                 $('#gameContentBox').append($('<div class="gameBox"><div class="flagBox"><img src="../images/jp.png" alt="Flag"></div><div class="titleGameBox"><h3>'+res[i].title+'</h3></div><div class="creatorGameBox"><h3>'+res[i].creator+'</h3></div><div class="settingsGameBox"><h3>'+res[i].type+'</h3></div><div class="playBox"><a href="/game/'+res[i]._id+'"><img src="../images/icons/play.png", alt="Play!"></img></a></div></div>'));
             }
-        });
+        });*/
     });
+
+    var usuario = '#{user}';
+    var socket = io.connect('http://localhost');
+
+    $("#botonCrear").click(function(){
+        socket.emit('nuevapartida', {user: usuario});
+        socket.emit('listapartidas');
+    });
+
+    $("#botonReload").click(function(){
+        socket.emit('listapartidas');
+    });
+
+    socket.on('id', function (data) {
+        console.log(data);
+        socket.emit('listapartidas');
+    });
+
+    socket.on('listapartidas', function (data) {
+        console.log(data);
+        $('#gameContentBox').empty();
+        for(var i=0; i<data.lista.length; i++){
+            $('#gameContentBox').append($('<div class="gameBox"><div class="flagBox"><img src="../images/jp.png" alt="Flag"></div><div class="titleGameBox"><h3>'+data.lista[i].nombre+'</h3></div><div class="creatorGameBox"><h3>'+data.lista[i].autor+'</h3></div><div class="settingsGameBox"><h3>19x19</h3></div><div class="playBox"><a href="/game/'+data.lista[i].gameId+'"><img src="../images/icons/play.png", alt="Play!"></img></a></div></div>'));
+        }
+    });
+
+

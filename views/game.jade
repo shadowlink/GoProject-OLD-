@@ -1,37 +1,18 @@
 #mainContent
-    #leftBar
-        #userBox
-            #avatarBox
-                h1= user
-                img(src='../images/nyancat.png', alt='Avatar')
-            #dataBox
-                #lvlBox
-                    img(src='../images/icons/lvl.png', alt='Grado')
-                    | 30 kyu
-                #winBox
-                    img(src='../images/icons/win.png', alt='Ganadas')
-                    | 1000
-                #lostBox
-                    img(src='../images/icons/lost.png', alt='Perdidas')
-                    | 1000
-        #settingsBox
-            .optionBox
-                h1= "Perfil"
-            .optionBox
-                h1= "Mensajes"
-            .optionBox
-                h1= "Partidas"
-    #middleBar
-        #searchBox
-            form#searchForm(action='/search', method='post')
-                input#userField(type="text", name="s")
-                button#searchButton(type='submit')
-                    img(src='../images/icons/search.png', alt='Buscar')
-        
-        #gameContentBox
-            canvas#canvas(width='550', height='550')
-            
-    #rightBar
+
+    #gameContentBox
+        canvas#canvas(width='600', height='600')
+
+    #playersBar
+        #players
+        #viewers
+            button#botonPass(type='button')
+                | Pasar
+            button#botonAbandon(type='button')
+                | Rendirse
+            button#botonExit(type='button')
+                | Salir
+    #chatBar
         #chatBox
         #inputChatBox
             input#textChat(type="text", name="textChat")

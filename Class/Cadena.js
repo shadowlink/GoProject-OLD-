@@ -81,4 +81,8 @@ Cadena = function(){
 		return existe;
 	}
 
+	this.numPiedras = function() {
+		return this.Piedras.length;
+	}
+
 }

@@ -1,0 +1,16 @@
+---
+applications:
+  .:
+    name: goproject
+    framework:
+      name: node
+      info:
+        mem: 64M
+        description: Node.js Application
+        exec: 
+    url: goproject.cloudfoundry.com
+    mem: 1G
+    instances: 1
+    services:
+      mongodb-73d9c:
+        type: mongodb
