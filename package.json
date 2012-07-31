@@ -12,6 +12,7 @@
   "subdomain": "NodeApp",
   "scripts": {
     "start": "server.js"
+	"test": "vows --spec"
   },
   "engines": {
     "node": "0.8.x"
