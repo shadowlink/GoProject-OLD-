@@ -7,15 +7,15 @@
     "stylus": ">= 0.0.1",
     "jade": ">= 0.0.1",
     "cradle": ">= 0.6.3",
-    "socket.io": ">=0.9.x",
-  }, 
+    "socket.io": ">=0.9.x"
+  },
   "devDependencies": {
     "vows": "0.6.x"
   },
   "subdomain": "NodeApp",
   "scripts": {
     "start": "server.js",
-	"test": "vows --spec"
+    "test": "vows --spec"
   },
   "engines": {
     "node": "0.8.x"
