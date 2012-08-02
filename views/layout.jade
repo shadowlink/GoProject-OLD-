@@ -2,6 +2,7 @@
 html
   head
     title= title
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Josefin+Slab')
     link(rel='stylesheet', href='/stylesheets/layout.css')
     link(rel='stylesheet', href='/stylesheets/login.css')
     link(rel='stylesheet', href='/stylesheets/main.css')
@@ -11,11 +12,10 @@ html
       script(src='../javascripts/socket.io.min.js')
   body
     header#navbar
-      h1= "GoProject"
     section#wrapper!= body
     
     footer#footer
-      h2= "Desarrollado por ShadowLink 2012"
+      h3= "Desarrollado por ShadowLink 2012"
       
 script(type='text/javascript')      
   $("body").css("display", "none");

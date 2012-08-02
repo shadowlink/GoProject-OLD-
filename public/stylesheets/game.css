@@ -43,7 +43,11 @@
 }
 #canvas {
   margin: 20px 0px 0px 50px;
-  background: #fff;
+  background-image: url("../images/tablero.png");
+  box-shadow: 10px 10px 40px #000;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 #playersBar {
   width: 24%;

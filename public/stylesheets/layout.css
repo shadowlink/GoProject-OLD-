@@ -5,16 +5,15 @@
 body {
   font: 62.5%/1.5 Helvetica, Arial, "Lucida Grande", "Lucida Sans", Tahoma, Verdana, sans-serif;
   text-align: center;
-  background-image: url("../images/index_back.jpg");
-  background-size: cover;
+  background-image: url("../images/index_back.png");
 }
 #navbar {
   text-align: left;
   background: #fff;
   width: auto;
-  height: auto;
-  opacity: 0.7;
-  padding: 5px 0px 5px 10px;
+  height: 20px;
+  opacity: 0.6;
+  padding: 5px 0px 3px 5px;
   color: #173b0b;
 }
 #footer {
@@ -22,9 +21,9 @@ body {
   background: #fff;
   width: 100%;
   height: auto;
-  opacity: 0.7;
+  opacity: 0.6;
   padding: 5px 0px 5px 10px;
-  color: #173b0b;
+  color: #5f4c0b;
   position: fixed;
   bottom: 0;
 }

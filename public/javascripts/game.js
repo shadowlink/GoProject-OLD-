@@ -91,12 +91,13 @@ function sendMov(cell){
 }
 
 socket.on('movimiento', function (data) {
+	//var snd = new Audio("../sound/stone.wav");
 	canvas.width = canvas.width;
 	tablero = data.mensaje;
 	drawBoard();
 	drawLines();
-	drawPiedras();
-
+	drawPiedras();	
+	//snd.play();
 	if(turno == false){
 		turno = true;
 	}
@@ -125,8 +126,7 @@ function draw(){
 		
 		// Draw the background
 		drawBoard();
-		drawLines();
-		
+		drawLines();	
 		// Draw pieces
 		//pieces = new Image();
 		//pieces.src = 'pieces.png';
@@ -139,7 +139,7 @@ function draw(){
 }
 
 function drawBoard(){	
-	for(iRowCounter = 0; iRowCounter < NUMBER_OF_ROWS; iRowCounter++)
+	/*for(iRowCounter = 0; iRowCounter < NUMBER_OF_ROWS; iRowCounter++)
 	{
 		drawRow(iRowCounter);
 	}	
@@ -147,39 +147,7 @@ function drawBoard(){
 	// Draw outline
 	ctx.lineWidth = 1;
     ctx.strokeStyle = '#848484';
-	ctx.strokeRect(0, 0, NUMBER_OF_ROWS * BLOCK_SIZE, NUMBER_OF_COLS * BLOCK_SIZE);	
-}
-
-function drawRow(iRowCounter){
-	// Draw 8 block left to right
-	for(iBlockCounter = 0; iBlockCounter < NUMBER_OF_ROWS; iBlockCounter++)
-	{
-		drawBlock(iRowCounter, iBlockCounter);
-	}
-}
-
-function drawBlock(iRowCounter, iBlockCounter){	
-	// Set the background
-
-	ctx.fillStyle = getBlockColour(iRowCounter, iBlockCounter);
-	
-	// Draw rectangle for the background
-	ctx.fillRect(iRowCounter * BLOCK_SIZE, iBlockCounter * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-	ctx.strokeStyle = '#FFFFFF';
-	//ctx.strokeRect(iRowCounter * BLOCK_SIZE, iBlockCounter * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-	ctx.stroke();	
-}
-
-function getBlockColour(iRowCounter, iBlockCounter){
-	var cStartColour;
-	
-	// Alternate the block colour
-	if(iRowCounter % 2)
-		cStartColour = (iBlockCounter % 2?BLOCK_COLOUR_1:BLOCK_COLOUR_2);
-	else
-		cStartColour = (iBlockCounter % 2?BLOCK_COLOUR_2:BLOCK_COLOUR_1);
-		
-	return cStartColour;
+	ctx.strokeRect(0, 0, NUMBER_OF_ROWS * BLOCK_SIZE, NUMBER_OF_COLS * BLOCK_SIZE);	*/
 }
 
 function drawLines(){
@@ -242,21 +210,21 @@ function drawLines(){
 }
 
 function drawPiedras(){
+
+
 	for(var i=0; i<tablero.length; i++){
 		for(var j=0; j<tablero.length; j++){
-
-			ctx.beginPath();
+			img = new Image();
 			if(tablero[i][j] == 'b'){
-				ctx.fillStyle = '#000000';
+				img.src = "../images/pieces_black.png";
 			}
 			else if(tablero[i][j] == 'w')
 			{
-				ctx.fillStyle = '#FFFFFF';
+				img.src = "../images/pieces_white.png";
 			}
 			
 			if(tablero[i][j]!=null){
-				ctx.arc((j*BLOCK_SIZE)+(BLOCK_SIZE/2), (i*BLOCK_SIZE)+(BLOCK_SIZE/2), 14, 0, 2 * Math.PI, true);
-				ctx.fill();	
+				ctx.drawImage(img, j*BLOCK_SIZE, i*BLOCK_SIZE);
 			}
 		}
 	}

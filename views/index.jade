@@ -1,4 +1,6 @@
 #panelBox
+    #logo
+        img(src='../images/logo.png', alt='GoProject')
     #loginBetaBox
         #login
             if user
@@ -7,13 +9,13 @@
                 h3= "Usuario"
                 input#userField(type="text", name="user")
                 br
+                br
                 h3= "Password"
                 input#passField(type="password", name="pass")
                 br
+                br
                 button#loginButton(type='submit')
                     | Login
-    #imageLoginBox
-        img(src='../images/img_index.jpg', alt='Baduk')
 
 #beta
     h1= "Apúntate a la beta"
