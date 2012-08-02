@@ -1,9 +1,6 @@
-<h1>GoProject</h1>
+# GoProject
 
-<h2>Introducción</h2>
+## IntroducciÃ³n
 
-<b>Desarrolladores: </b> Víctor Manuel González Mira
-<b>Diseñadores: </b> Víctor Manuel González Mira
-
-<h2>Descripción</h2>
-Aplicación web para jugar al Go desarrollada sobre node.js haciendo uso de websockets.
+**Desarrolladores: ** VÃ­ctor Manuel GonzÃ¡lez Mira **DiseÃ±adores: ** VÃ­ctor Manuel GonzÃ¡lez Mira 
+## DescripciÃ³n AplicaciÃ³n web para jugar al Go desarrollada sobre node.js haciendo uso de websockets.
