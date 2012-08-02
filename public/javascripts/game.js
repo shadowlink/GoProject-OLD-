@@ -10,6 +10,10 @@ var color = null;
 var turno = false;
 var tablero = [];
 var socket;
+var img_black = new Image();
+img_black.src = "../images/pieces_black.png";
+var img_white = new Image();
+img_white.src = "../images/pieces_white.png";
 
 
 socket = io.connect('http://localhost');
@@ -103,6 +107,11 @@ socket.on('movimiento', function (data) {
 	}
 	else{
 		turno = false;
+	}
+
+	//Actualizamos las puntuaciones
+	for(var i=0; i<data.players.length; i++){
+		$('#'+data.players[i].customId+' .points').html(data.players[i].ptos);
 	}
 });
 
@@ -210,21 +219,18 @@ function drawLines(){
 }
 
 function drawPiedras(){
-
-
 	for(var i=0; i<tablero.length; i++){
 		for(var j=0; j<tablero.length; j++){
-			img = new Image();
 			if(tablero[i][j] == 'b'){
-				img.src = "../images/pieces_black.png";
+				if(tablero[i][j]!=null){
+			   		ctx.drawImage(img_black, j*BLOCK_SIZE, i*BLOCK_SIZE);
+				}
 			}
 			else if(tablero[i][j] == 'w')
 			{
-				img.src = "../images/pieces_white.png";
-			}
-			
-			if(tablero[i][j]!=null){
-				ctx.drawImage(img, j*BLOCK_SIZE, i*BLOCK_SIZE);
+				if(tablero[i][j]!=null){
+			   		ctx.drawImage(img_white, j*BLOCK_SIZE, i*BLOCK_SIZE);
+				}
 			}
 		}
 	}

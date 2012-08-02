@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"part",
+				"partidasinfo"
+			],
+			[
+				"lista",
+				"listPartidasInfo"
+			],
+			[
+				"get",
+				"getPlayersInfo"
+			],
+			[
+				"list",
+				"listPlayersInfo"
+			],
+			[
+				"player",
+				"playerInfo"
+			],
+			[
+				"Cam",
+				"CambiaTurno"
+			],
+			[
+				"mouse",
+				"mouseIn"
+			],
+			[
+				"dra",
+				"drawPiedras"
+			],
+			[
+				"Lis",
+				"ListaCadenasState"
+			],
+			[
+				"Lista",
+				"ListaCadenas"
+			],
+			[
 				"cadenas",
 				"cadenasMuertas"
 			],
@@ -13,10 +53,6 @@
 			],
 			[
 				"lis",
-				"listaPiedras"
-			],
-			[
-				"Lista",
 				"listaPiedras"
 			],
 			[
@@ -30,14 +66,6 @@
 			[
 				"Cade",
 				"CadenaFinal"
-			],
-			[
-				"lista",
-				"ListaCadenas"
-			],
-			[
-				"part",
-				"partidas"
 			],
 			[
 				"parti",
@@ -60,20 +88,8 @@
 				"miPartida"
 			],
 			[
-				"get",
-				"getPartida"
-			],
-			[
-				"list",
-				"listaPiedras"
-			],
-			[
 				"ga",
 				"gameId"
-			],
-			[
-				"player",
-				"playerId"
 			],
 			[
 				"c",
@@ -112,34 +128,10 @@
 	"buffers":
 	[
 		{
-			"file": "public/javascripts/game.js",
-			"settings":
-			{
-				"buffer_size": 6624,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server.js",
-			"settings":
-			{
-				"buffer_size": 6200,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "Class/Partida.js",
 			"settings":
 			{
-				"buffer_size": 8099,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Class/Cadena.js",
-			"settings":
-			{
-				"buffer_size": 1708,
+				"buffer_size": 11641,
 				"line_ending": "Windows"
 			}
 		},
@@ -147,17 +139,48 @@
 			"file": "Class/Player.js",
 			"settings":
 			{
-				"buffer_size": 269,
+				"buffer_size": 288,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Class/Piedra.js",
+			"file": "Class/Cadena.js",
 			"settings":
 			{
-				"buffer_size": 93,
-				"line_ending": "Windows",
-				"name": "eee"
+				"buffer_size": 1978,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 10288,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/game.jade",
+			"settings":
+			{
+				"buffer_size": 659,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/javascripts/game.js",
+			"settings":
+			{
+				"buffer_size": 7916,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/game.styl",
+			"settings":
+			{
+				"buffer_size": 1683,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -185,21 +208,34 @@
 	},
 	"file_history":
 	[
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/main.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/test/PartidaTest.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/index.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/layout.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/login.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/package.json",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/game.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/tests/PartidaTest.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/game.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/javascripts/game.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Piedra.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/gameList.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Controllers/GameProvider.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/gameList.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/main.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.css",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/server.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Partida.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Cadena.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Player.js",
 		"/C/Users/shado_000/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
 		"/C/Users/shado_000/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/goServer.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/game.jade",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/login.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.styl",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/index.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/gameList.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/game.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/javascripts/game.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/server.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.css",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/layout.jade",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.styl",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/index.jade"
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.css"
 	],
 	"find":
 	{
@@ -217,6 +253,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"getplayerb",
+			"gameid",
+			"piedraad",
+			");\n",
+			"listapiedras",
 			"console.log",
 			"socket.emit('id', { user: usuario, game: gameId });"
 		],
@@ -236,78 +277,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/javascripts/game.js",
-					"settings":
-					{
-						"buffer_size": 6624,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2146,
-								2146
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3285.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "server.js",
-					"settings":
-					{
-						"buffer_size": 6200,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1417,
-								1417
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 251.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "Class/Partida.js",
 					"settings":
 					{
-						"buffer_size": 8099,
+						"buffer_size": 11641,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3817,
-								3817
+								2460,
+								2460
 							]
 						],
 						"settings":
@@ -317,25 +303,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1685.0,
+						"translation.y": 1533.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "Class/Cadena.js",
+					"buffer": 1,
+					"file": "Class/Player.js",
 					"settings":
 					{
-						"buffer_size": 1708,
+						"buffer_size": 288,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								301,
-								301
+								288,
+								288
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Class/Cadena.js",
+					"settings":
+					{
+						"buffer_size": 1978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1972,
+								1972
 							]
 						],
 						"settings":
@@ -344,30 +358,58 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 90.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "Class/Player.js",
+					"buffer": 3,
+					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 269,
+						"buffer_size": 10288,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								122,
-								122
+								3850,
+								3850
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4054.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/game.jade",
+					"settings":
+					{
+						"buffer_size": 659,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -379,27 +421,55 @@
 				},
 				{
 					"buffer": 5,
-					"file": "Class/Piedra.js",
+					"file": "public/javascripts/game.js",
 					"settings":
 					{
-						"buffer_size": 93,
+						"buffer_size": 7916,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								21,
-								21
+								3032,
+								3032
 							]
 						],
 						"settings":
 						{
-							"auto_name": "eee",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/stylesheets/game.styl",
+					"settings":
+					{
+						"buffer_size": 1683,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								792,
+								792
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Stylus/Syntaxes/Stylus.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

@@ -107,7 +107,7 @@ Partida = function(){
         var player = null;
 
         for(j=0; j<this.players.length; j++){
-            if(this.players[j].socket == socket){
+            if(this.players[j].playerId == socket){
                 player = this.players[j];
                 break;
             }
@@ -142,9 +142,10 @@ Partida = function(){
         //Con esto prevenimos que la cadena objetivo se suicide si el grupo que la rodeaba ha muerto.
         for(var i=0; i<this.ListaCadenas.length; i++){
             if(this.ListaCadenas[i] != cadenaPiedra){
+                var ptos = this.ListaCadenas[i].numPiedras();
                 if(this.ListaCadenas[i].EliminarCadenasMuertas(this.tablero)){
                     var p = this.getPlayerBySocket(socket);
-                    p.ptos += this.ListaCadenas[i].numPiedras();
+                    p.ptos += ptos;
                     this.ListaCadenas.splice(i, 1);
                     i--;
                 }

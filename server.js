@@ -301,8 +301,8 @@ socket.sockets.on('connection', function (socket) {
         //Añadimos el nuevo movimiento a la lista de movimientos de la partida si se permite
         if(miPartida.nuevoMovimiento(piedra, socket.id)){
           for(j=0; j<miPartida.players.length; j++){
-              //console.log("Enviado a: "+miPartida.players[j].customId);
-              miPartida.players[j].socket.emit('movimiento', { mensaje: miPartida.tablero });
+              //Enviamos los datos del tablero y puntuaciones a los jugadores
+              miPartida.players[j].socket.emit('movimiento', { mensaje: miPartida.tablero, players: miPartida.getPlayersInfo() });
           }
 
           //Cambiamos el turno
