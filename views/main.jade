@@ -15,22 +15,16 @@
                     img(src='../images/icons/lost.png', alt='Perdidas')
                     | 1000
         #settingsBox
-            .optionBox
-                h1= "Perfil"
-            .optionBox
-                h1= "Mensajes"
-            .optionBox
-                h1= "Partidas"
+            .optionBox#botonCrear
+                    | Crear partida
+            .optionBox#botonReload
+                    | Recargar lista
     #middleBar
         #searchBox
             form#searchForm(action='/search', method='post')
                 input#userField(type="text", name="s")
                 button#searchButton(type='submit')
-                    img(src='../images/icons/search.png', alt='Buscar')
-                button#botonCrear(type='button')
-                    | Crear
-                button#botonReload(type='button')
-                    | Reload        
+                    img(src='../images/icons/search.png', alt='Buscar')    
         #gameContentBox
     #rightBar
         h1= "Top Players"
@@ -46,7 +40,7 @@ script(type='text/javascript')
     });
 
     var usuario = '#{user}';
-    var socket = io.connect('http://localhost');
+    var socket = io.connect();
 
     $("#botonCrear").click(function(){
         socket.emit('nuevapartida', {user: usuario});

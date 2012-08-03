@@ -160,18 +160,26 @@
 			}
 		},
 		{
-			"file": "views/game.jade",
+			"file": "public/javascripts/game.js",
 			"settings":
 			{
-				"buffer_size": 659,
+				"buffer_size": 7928,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/javascripts/game.js",
+			"file": "views/main.jade",
 			"settings":
 			{
-				"buffer_size": 7916,
+				"buffer_size": 2733,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/main.styl",
+			"settings":
+			{
+				"buffer_size": 4020,
 				"line_ending": "Windows"
 			}
 		},
@@ -179,7 +187,23 @@
 			"file": "public/stylesheets/game.styl",
 			"settings":
 			{
-				"buffer_size": 1683,
+				"buffer_size": 3155,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/layout.jade",
+			"settings":
+			{
+				"buffer_size": 707,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/game.jade",
+			"settings":
+			{
+				"buffer_size": 656,
 				"line_ending": "Windows"
 			}
 		}
@@ -208,18 +232,19 @@
 	},
 	"file_history":
 	[
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/game.jade",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/main.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Controllers/UserProvider.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/package.json",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/test/PartidaTest.js",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/index.jade",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/layout.jade",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/login.styl",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/package.json",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.styl",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/game.jade",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/tests/PartidaTest.js",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/game.js",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/javascripts/game.js",
-		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.styl",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Piedra.js",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/gameList.js",
 		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Controllers/GameProvider.js",
@@ -277,7 +302,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -375,8 +400,8 @@
 						"selection":
 						[
 							[
-								3850,
-								3850
+								1554,
+								1554
 							]
 						],
 						"settings":
@@ -386,25 +411,52 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4054.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "views/game.jade",
+					"file": "public/javascripts/game.js",
 					"settings":
 					{
-						"buffer_size": 659,
+						"buffer_size": 7928,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2183,
+								2183
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 556.0,
+						"translation.y": 675.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "views/main.jade",
+					"settings":
+					{
+						"buffer_size": 2733,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								703,
+								703
 							]
 						],
 						"settings":
@@ -420,46 +472,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "public/javascripts/game.js",
-					"settings":
-					{
-						"buffer_size": 7916,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3032,
-								3032
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1080.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 6,
-					"file": "public/stylesheets/game.styl",
+					"file": "public/stylesheets/main.styl",
 					"settings":
 					{
-						"buffer_size": 1683,
+						"buffer_size": 4020,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								792,
-								792
+								2026,
+								2026
 							]
 						],
 						"settings":
@@ -469,7 +494,91 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 1305.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/stylesheets/game.styl",
+					"settings":
+					{
+						"buffer_size": 3155,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								790,
+								566
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Stylus/Syntaxes/Stylus.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 135.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "views/layout.jade",
+					"settings":
+					{
+						"buffer_size": 707,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								352,
+								352
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "views/game.jade",
+					"settings":
+					{
+						"buffer_size": 656,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								30,
+								30
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

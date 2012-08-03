@@ -59,7 +59,7 @@ app.get('/about', function(req,res){
 
 var socket = io.listen(app, { log: false });
 
-app.listen(3000, function(){
+app.listen(8080, function(){
   //console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 

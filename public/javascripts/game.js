@@ -16,7 +16,7 @@ var img_white = new Image();
 img_white.src = "../images/pieces_white.png";
 
 
-socket = io.connect('http://localhost');
+socket = io.connect();
 
 
 //-------------SOCKET CHAT-----------------//
@@ -70,7 +70,7 @@ socket.on('color', function (data) {
 socket.on('listaplayers', function (data) {
 		$('#players').empty();
 		for(var i=0; i < data.lista.length; i++){
-		  $('#players').append($('<div class="player" id ='+data.lista[i].customId+'><h1>'+data.lista[i].customId+'</h1><img src = "../images/nyancat.png"><div class="points">0</div></div>'));
+		  $('#players').append($('<div class="player" id ='+data.lista[i].customId+'><div class="playerName"><h1>'+data.lista[i].customId+'</h1></div><img src = "../images/nyancat.png"><div class="points">0</div></div>'));
 		}
 	
 });
