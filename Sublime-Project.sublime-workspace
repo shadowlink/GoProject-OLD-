@@ -1,0 +1,333 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"part",
+				"partidasinfo"
+			],
+			[
+				"lista",
+				"listPartidasInfo"
+			],
+			[
+				"get",
+				"getPlayersInfo"
+			],
+			[
+				"list",
+				"listPlayersInfo"
+			],
+			[
+				"player",
+				"playerInfo"
+			],
+			[
+				"Cam",
+				"CambiaTurno"
+			],
+			[
+				"mouse",
+				"mouseIn"
+			],
+			[
+				"dra",
+				"drawPiedras"
+			],
+			[
+				"Lis",
+				"ListaCadenasState"
+			],
+			[
+				"Lista",
+				"ListaCadenas"
+			],
+			[
+				"cadenas",
+				"cadenasMuertas"
+			],
+			[
+				"cade",
+				"cadenasMuertas"
+			],
+			[
+				"lis",
+				"listaPiedras"
+			],
+			[
+				"Ca",
+				"Cadena4"
+			],
+			[
+				"agre",
+				"agregarPiedra"
+			],
+			[
+				"Cade",
+				"CadenaFinal"
+			],
+			[
+				"parti",
+				"partida"
+			],
+			[
+				"playe",
+				"players"
+			],
+			[
+				"play",
+				"players"
+			],
+			[
+				"pla",
+				"playerId"
+			],
+			[
+				"mi",
+				"miPartida"
+			],
+			[
+				"ga",
+				"gameId"
+			],
+			[
+				"c",
+				"color"
+			],
+			[
+				"Pos",
+				"posX"
+			],
+			[
+				"pl",
+				"playerId"
+			],
+			[
+				"s",
+				"socket"
+			],
+			[
+				"game",
+				"gameId"
+			],
+			[
+				"nu",
+				"NUMBER_OF_ROWS"
+			],
+			[
+				"blo",
+				"BLOCK_SIZE"
+			],
+			[
+				"Blo",
+				"BLOCK_SIZE"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 10288,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/ShadowLink/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/ShadowLink/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/ShadowLink/Desktop/NodeApp/public/stylesheets/game.styl",
+		"/C/Users/ShadowLink/Desktop/NodeApp/views/gameList.jade",
+		"/C/Users/ShadowLink/Desktop/NodeApp/server.js",
+		"/C/Users/ShadowLink/Desktop/NodeApp/public/stylesheets/login.styl",
+		"/C/Users/ShadowLink/Desktop/NodeApp/public/stylesheets/main.styl",
+		"/C/Users/ShadowLink/Desktop/NodeApp/views/main.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/index.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/layout.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/login.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/main.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/main.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/game.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/javascripts/game.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/server.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Cadena.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Player.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Partida.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.styl",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Controllers/UserProvider.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/package.json",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/test/PartidaTest.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/tests/PartidaTest.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/game.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Class/Piedra.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/gameList.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/Controllers/GameProvider.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/views/gameList.jade",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/layout.css",
+		"/C/Users/shado_000/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/C/Users/shado_000/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/goServer.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/login.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/routes/index.js",
+		"/C/Users/shado_000/Desktop/Proyectos/NodeApp/public/stylesheets/game.css"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"getplayerb",
+			"gameid",
+			"piedraad",
+			");\n",
+			"listapiedras",
+			"console.log",
+			"socket.emit('id', { user: usuario, game: gameId });"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "server.js",
+					"settings":
+					{
+						"buffer_size": 10288,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1107,
+								1107
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 212.0,
+	"status_bar_visible": true
+}

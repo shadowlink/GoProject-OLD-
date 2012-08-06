@@ -3,8 +3,6 @@
         img(src='../images/logo.png', alt='GoProject')
     #loginBetaBox
         #login
-            if user
-                h1= "Bienvenido "+user
             form#loginForm(action='/login', method='post')
                 h3= "Usuario"
                 input#userField(type="text", name="user")
@@ -13,15 +11,13 @@
                 h3= "Password"
                 input#passField(type="password", name="pass")
                 br
-                br
                 button#loginButton(type='submit')
                     | Login
 
 #beta
     h1= "Apúntate a la beta"
     form#betaForm(action='/beta', method='post')
-        h3= "Email"
-        input#mailField(type="text", name="mail")
+        input#mailField(type="text", name="mail", value="e-Mail")
         button#betaButton(type='button')
             | Enviar
     br

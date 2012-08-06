@@ -8,10 +8,12 @@ input {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  font-family: 'Cabin Condensed', sans-serif;
+  color: #585858;
 }
 input:focus {
   outline: none;
-  border: 1px solid #3b240b;
+  box-shadow: 0px 0px 10px #fbfbef;
 }
 #wrapper {
   width: 100%;
@@ -34,19 +36,25 @@ input:focus {
   border-radius: 20px;
   background: #000;
   background: rgba(0,0,0,0.3);
-  box-shadow: 0px 0px 10px #fbfbef;
+  box-shadow: 0px 0px 50px #848484;
+  border: 1px solid;
   display: none;
-  text-align: center;
+  text-align: left;
+  font-family: 'Courgette';
+  font-size: 130%;
+  color: #fff;
 }
 #panelBox button {
   background: #fff;
   border: 1px solid #bdbdbd;
-  font-size: 200%;
+  font-size: 150%;
   height: 32px;
   margin: 10px 0px 0px 0px;
   padding: 3px 3px 3px 3px;
-  border-radius: 5px;
+  border-radius: 15px;
   width: 100px;
+  font-family: 'Cabin Condensed', sans-serif;
+  color: #585858;
 }
 #panelBox button:active {
   background: #f5f6ce;
@@ -65,6 +73,7 @@ input:focus {
   position: relative;
   width: 100%;
   padding-top: 30px;
+  margin: 0px 0px 0px 50px;
 }
 #beta {
   width: 40%;
@@ -80,18 +89,24 @@ input:focus {
   border-radius: 20px;
   background: #000;
   background: rgba(0,0,0,0.3);
-  box-shadow: 0px 0px 10px #fbfbef;
+  box-shadow: 0px 0px 50px #848484;
+  border: 1px solid;
   display: none;
+  font-family: 'Courgette';
+  font-size: 100%;
+  color: #fff;
 }
 #beta button {
   background: #fff;
   border: 1px solid #bdbdbd;
-  font-size: 200%;
+  font-size: 160%;
   height: 32px;
   margin: 0px 0px 0px 5px;
   padding: 3px 3px 3px 3px;
   border-radius: 5px;
-  font-family: 'Josefin Slab';
+  font-family: 'Cabin Condensed', sans-serif;
+  color: #585858;
+  vertical-align: middle;
 }
 #beta button:active {
   background: #f5f6ce;
@@ -101,4 +116,7 @@ input:focus {
 }
 #beta input {
   width: 85%;
+  vertical-align: middle;
+  color: #585858;
+  font-family: 'Cabin Condensed', sans-serif;
 }
