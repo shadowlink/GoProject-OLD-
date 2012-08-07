@@ -91,12 +91,11 @@ socket.sockets.on('connection', function (socket) {
 
   socket.on('listapartidas', function (data) {
     var listapartidas = getPartidasInfo();
-    console.log(listapartidas);
     socket.emit('listapartidas', { lista: listapartidas});
   });
 
   socket.on('nuevapartida', function (data) {
-    var p = new Partida;
+    var p = new Partida();
     p.gameId = generateUUID();
     p.nombre = "Partida Zeta";
     p.autor = data.user;
