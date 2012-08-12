@@ -59,7 +59,7 @@ app.get('/about', function(req,res){
 
 var socket = io.listen(app, { log: false });
 
-app.listen(9062, function(){
+app.listen(process.env.PORT, process.env.IP, function(){
   //console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
 
@@ -200,6 +200,7 @@ socket.sockets.on('connection', function (socket) {
   });
 
   //-------------------------------------------------------------------//
+
 
 
 
